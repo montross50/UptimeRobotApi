@@ -36,7 +36,7 @@ class UptimeRobotApiServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app['uptimerobot'] = $this->app->share(function($app){
+       $this->app->bind(UptimeRobotManager::class,function($app){
 
             $client = $app->make(UptimeRobotClient::class);
             $serializer = new Serializer(
@@ -52,7 +52,7 @@ class UptimeRobotApiServiceProvider extends ServiceProvider
             $messageFactory = new GuzzleMessageFactory();
             $api = new UptimeRobotResource($client,$messageFactory,$serializer);
             $urm = new UptimeRobotManager($api);
-            $apiKey = $app['config']->get('uptimerobot.api_key', '');
+            $apiKey = $app['config']->get('uptimerobot.apiKey', '');
             $urm->setApiKey($apiKey);
             return $urm;
         });

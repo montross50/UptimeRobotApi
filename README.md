@@ -20,8 +20,8 @@ $ composer require montross50/uptime-robot-api
 ## Usage
 
 ``` php
-$skeleton = new League\Skeleton();
-echo $skeleton->echoPhrase('Hello, League!');
+$api = \App::make(UptimeRobotManager::class);
+echo $api->getMonitors();
 ```
 
 ## Change log

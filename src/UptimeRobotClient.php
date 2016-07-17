@@ -3,8 +3,8 @@
 namespace Montross50\UptimeRobotApi;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Message\MessageFactory;
 use Http\Client\HttpClient;
+use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Psr\Http\Message\RequestInterface;
 
 class UptimeRobotClient implements HttpClient
@@ -16,8 +16,8 @@ class UptimeRobotClient implements HttpClient
     
     public function __construct($options = [])
     {
-        $messageFactory = new MessageFactory();
-        $client = new Client($messageFactory, $options);
+        $messageFactory = new GuzzleMessageFactory();
+        $client = new \Http\Adapter\Guzzle5\Client(new Client($options),$messageFactory);
         
         $this->httpClient = $client;
     }
