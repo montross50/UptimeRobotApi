@@ -1,0 +1,971 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Uptime Robot Api",
+    "description": "Uptime robot api.",
+    "termsOfService": "http://example.com/tos/",
+    "version": "v1.0"
+  },
+  "host": "api.uptimerobot.com",
+  "basePath": "",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "definitions": {
+    "AccountDetails": {
+      "type": "object",
+      "properties": {
+        "stat": {
+          "type": "string"
+        },
+        "account": {
+          "$ref": "#/definitions/Account"
+        }
+      }
+    },
+    "Account": {
+      "type": "object",
+      "properties": {
+        "monitorLimit": {
+          "type": "string"
+        },
+        "monitorInterval": {
+          "type": "string"
+        },
+        "upMonitors": {
+          "type": "string"
+        },
+        "downMonitors": {
+          "type": "string"
+        },
+        "pausedMonitors": {
+          "type": "string"
+        }
+      }
+    },
+    "GetMonitorsResponse": {
+      "type": "object",
+      "properties": {
+        "stat": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "string"
+        },
+        "limit": {
+          "type": "string"
+        },
+        "total": {
+          "type": "string"
+        },
+        "monitors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Monitor"
+          }
+        }
+      }
+    },
+    "Monitor": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "friendlyname": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "subtype": {
+          "type": "string"
+        },
+        "keywordtype": {
+          "type": "string"
+        },
+        "keywordvalue": {
+          "type": "string"
+        },
+        "httpusername": {
+          "type": "string"
+        },
+        "httppassword": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        },
+        "interval": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "alltimeuptimeratio": {
+          "type": "string"
+        },
+        "customuptimeratio": {
+          "type": "string"
+        },
+        "alertcontact": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertContact"
+          }
+        },
+        "log": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Log"
+          }
+        },
+        "responsetime": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResponseTime"
+          }
+        }
+      }
+    },
+    "AlertContact": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "threshold": {
+          "type": "string"
+        },
+        "recurrence": {
+          "type": "string"
+        }
+      }
+    },
+    "Log": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "alertcontact": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertContact"
+          }
+        }
+      }
+    },
+    "ResponseTime": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string"
+        }
+      }
+    },
+    "MonitorResponse": {
+      "type": "object",
+      "properties": {
+        "stat": {
+          "type": "string"
+        },
+        "monitor": {
+          "$ref": "#/definitions/Monitor"
+        }
+      }
+    },
+    "GetAlertContactsResponse": {
+      "type": "object",
+      "properties": {
+        "stat": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "string"
+        },
+        "limit": {
+          "type": "string"
+        },
+        "total": {
+          "type": "string"
+        },
+        "alertcontacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertContact"
+          }
+        }
+      }
+    },
+    "AlertContactResponse": {
+      "type": "object",
+      "properties": {
+        "stat": {
+          "type": "string"
+        },
+        "alertcontact": {
+          "$ref": "#/definitions/AlertContact"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "stat": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/getAccountDetails": {
+      "get": {
+        "summary": "Get Account Details",
+        "description": "Account details (max number of monitors that can be added and number of up/down/paused monitors) can be grabbed using this method.",
+        "operationId": "getAccountDetails",
+        "parameters": [
+          {
+            "name": "apiKey",
+            "in": "query",
+            "description": "API key",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response format",
+            "type": "string",
+            "default": "json",
+            "required": false
+          },
+          {
+            "name": "noJsonCallback",
+            "in": "query",
+            "description": "Return raw json",
+            "type": "string",
+            "default": "1",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "no error",
+            "schema": {
+              "$ref": "#/definitions/AccountDetails"
+            }
+          },
+          "400": {
+            "description": "bad parameter"
+          },
+          "500": {
+            "description": "server error"
+          }
+        },
+        "tags": [
+          "UptimeRobot"
+        ]
+      }
+    },
+    "/getMonitors": {
+      "get": {
+        "summary": "Get Monitor information",
+        "description": "This is a Swiss-Army knife type of a method for getting any information on monitors. By default, it lists all the monitors in a user's account, their friendly names, types (http, keyword, port, etc.), statuses (up, down, etc.) and uptime ratios. There are optional parameters which lets the getMonitors method to output information on any given monitors rather than all of them.",
+        "operationId": "getMonitors",
+        "parameters": [
+          {
+            "name": "apiKey",
+            "in": "query",
+            "description": "API key",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response format",
+            "type": "string",
+            "default": "json",
+            "required": false
+          },
+          {
+            "name": "noJsonCallback",
+            "in": "query",
+            "description": "Return raw json",
+            "type": "string",
+            "default": "1",
+            "required": false
+          },
+          {
+            "name": "monitors",
+            "in": "query",
+            "description": "optional (if not used, will return all monitors in an account. Else, it is possible to define any number of monitors with their IDs like: monitors=15830-32696-83920)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "types",
+            "in": "query",
+            "description": "optional (if not used, will return all monitors types (HTTP, keyword, ping..) in an account. Else, it is possible to define any number of monitor types like: types=1-3-4)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "description": "optional (if not used, will return all monitors statuses (up, down, paused) in an account. Else, it is possible to define any number of monitor statuses like: statuses=2-9)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "customUptimeRatio",
+            "in": "query",
+            "description": "optional (defines the number of days to calculate the uptime ratio(s) for. Ex: customUptimeRatio=7-30-45 to get the uptime ratios for those periods)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "logs",
+            "in": "query",
+            "description": "ptional (defines if the logs of each monitor will be returned. Should be set to 1 for getting the logs. Default is 0)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "logsLimit",
+            "in": "query",
+            "description": "optional (the number of logs to be returned (descending order). If empty, all logs are returned.",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "responseTimes",
+            "in": "query",
+            "description": "optional (defines if the response time data of each monitor will be returned. Should be set to 1 for getting them. Default is 0)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "responseTimesLimit",
+            "in": "query",
+            "description": "",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "responseTimesAverage",
+            "in": "query",
+            "description": "optional (by default, response time value of each check is returned. The API can return average values in given minutes. Default is 0. For ex: the Uptime Robot dashboard displays the data averaged/grouped in 30 minutes)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "responseTimesStartDate",
+            "in": "query",
+            "description": "optional (the number of response time logs to be returned (descending order). If empty, last 24 hours of logs are returned (if responseTimesStartDate and responseTimesEndDate are not used).",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "responseTimesEndDate",
+            "in": "query",
+            "description": "optional and works only for the Pro Plan as 24 hour+ logs are kept only in the Pro Plan (ending date of the response times, formatted as 2015-04-23 and must be used with responseTimesStartDate) (can only be used if monitors parameter is used with a single monitorID and responseTimesEndDate - responseTimesStartDate can't be more than 7 days)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "alertContacts",
+            "in": "query",
+            "description": "optional (defines if the notified alert contacts of each notification will be returned. Should be set to 1 for getting them. Default is 0. Requires logs to be set to1)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "showMonitorAlertContacts",
+            "in": "query",
+            "description": "optional (defines if the alert contacts set for the monitor to be returned. Default is 0)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "showTimezone",
+            "in": "query",
+            "description": "optional (defines if the user's timezone should be returned. Should be set to 1 for getting it. Default is 0)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "optional (used for pagination. Defines the record to start paginating. Default is 0)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "optional (used for pagination. Defines the max number of records to return for the response. Default and max. is 50)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "optional (a keyword of your choice to search within monitorURL and monitorFriendlyName and get filtered results)",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "no error",
+            "schema": {
+              "$ref": "#/definitions/GetMonitorsResponse"
+            }
+          },
+          "400": {
+            "description": "bad parameter"
+          },
+          "500": {
+            "description": "server error"
+          }
+        },
+        "tags": [
+          "UptimeRobot"
+        ]
+      }
+    },
+    "/newMonitor": {
+      "get": {
+        "summary": "Create New Monitor",
+        "description": "New monitors of any type can be created using this method.",
+        "operationId": "createMonitor",
+        "parameters": [
+          {
+            "name": "apiKey",
+            "in": "query",
+            "description": "API key",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response format",
+            "type": "string",
+            "default": "json",
+            "required": false
+          },
+          {
+            "name": "noJsonCallback",
+            "in": "query",
+            "description": "Return raw json",
+            "type": "string",
+            "default": "1",
+            "required": false
+          },
+          {
+            "name": "monitorFriendlyName",
+            "in": "query",
+            "description": "name of monitor",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "monitorURL",
+            "in": "query",
+            "description": "URL to monitor",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "monitorType",
+            "in": "query",
+            "description": "type of monitor",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "monitorSubType",
+            "in": "query",
+            "description": "required for port monitoring",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorPort",
+            "in": "query",
+            "description": "required for port monitoring",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorKeywordType",
+            "in": "query",
+            "description": "required for keyword monitoring",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorKeywordValue",
+            "in": "query",
+            "description": "required for keyword monitoring",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorHTTPUsername",
+            "in": "query",
+            "description": "",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorHTTPPassword",
+            "in": "query",
+            "description": "",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorAlertContacts",
+            "in": "query",
+            "description": "the alert contacts to be notified when the monitor goes up/down.Multiple alertContactIDs can be sent like monitorAlertContacts=457_0_0-373_5_0-8956_2_3 where alertContactIDs are seperated with - and threshold + recurrence are seperated with _. For ex: monitorAlertContacts=457_5_0 refers to 457 being the alertContactID, 0 being the threshold and 0 being the recurrence. As the threshold and recurrence is only available in the Pro Plan, they are always 0 in the Free Plan)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorInterval",
+            "in": "query",
+            "description": "in minutes",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "no error",
+            "schema": {
+              "$ref": "#/definitions/MonitorResponse"
+            }
+          },
+          "400": {
+            "description": "bad parameter"
+          },
+          "500": {
+            "description": "server error"
+          }
+        },
+        "tags": [
+          "UptimeRobot"
+        ]
+      }
+    },
+    "/deleteMonitor": {
+      "get": {
+        "summary": "Delete Monitor",
+        "description": "Monitors can be deleted using this method.",
+        "operationId": "deleteMonitor",
+        "parameters": [
+          {
+            "name": "apiKey",
+            "in": "query",
+            "description": "API key",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response format",
+            "type": "string",
+            "default": "json",
+            "required": false
+          },
+          {
+            "name": "noJsonCallback",
+            "in": "query",
+            "description": "Return raw json",
+            "type": "string",
+            "default": "1",
+            "required": false
+          },
+          {
+            "name": "monitorID",
+            "in": "query",
+            "description": "ID of monitor to delete",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "no error",
+            "schema": {
+              "$ref": "#/definitions/MonitorResponse"
+            }
+          },
+          "400": {
+            "description": "bad parameter"
+          },
+          "500": {
+            "description": "server error"
+          }
+        },
+        "tags": [
+          "UptimeRobot"
+        ]
+      }
+    },
+    "/editMonitor": {
+      "get": {
+        "summary": "Edit a Monitor",
+        "description": "Monitors can be edited using this method. Important: The type of a monitor can not be edited (like changing a HTTP monitor into a Port monitor). For such cases, deleting the monitor and re-creating a new one is adviced.",
+        "operationId": "editMonitor",
+        "parameters": [
+          {
+            "name": "apiKey",
+            "in": "query",
+            "description": "API key",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response format",
+            "type": "string",
+            "default": "json",
+            "required": false
+          },
+          {
+            "name": "noJsonCallback",
+            "in": "query",
+            "description": "Return raw json",
+            "type": "string",
+            "default": "1",
+            "required": false
+          },
+          {
+            "name": "monitorFriendlyName",
+            "in": "query",
+            "description": "name of monitor",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorURL",
+            "in": "query",
+            "description": "URL to monitor",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorType",
+            "in": "query",
+            "description": "type of monitor",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorSubType",
+            "in": "query",
+            "description": "required for port monitoring",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorPort",
+            "in": "query",
+            "description": "required for port monitoring",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorKeywordType",
+            "in": "query",
+            "description": "required for keyword monitoring",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorKeywordValue",
+            "in": "query",
+            "description": "required for keyword monitoring",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorHTTPUsername",
+            "in": "query",
+            "description": "in order to remove any previously added username, simply send the value empty like monitorHTTPUsername=",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorHTTPPassword",
+            "in": "query",
+            "description": "in order to remove any previously added password, simply send the value empty like monitorHTTPPassword=)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorAlertContacts",
+            "in": "query",
+            "description": "the alert contacts to be notified when the monitor goes up/down.Multiple alertContactIDs can be sent like monitorAlertContacts=457_0_0-373_5_0-8956_2_3 where alertContactIDs are seperated with - and threshold + recurrence are seperated with _. For ex: monitorAlertContacts=457_5_0 refers to 457 being the alertContactID, 0 being the threshold and 0 being the recurrence. As the threshold and recurrence is only available in the Pro Plan, they are always 0 in the Free Plan) (in order to remove any previously added alert contacts, simply send the value empty like monitorAlertContacts=",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "monitorInterval",
+            "in": "query",
+            "description": "in minutes",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "no error",
+            "schema": {
+              "$ref": "#/definitions/MonitorResponse"
+            }
+          },
+          "400": {
+            "description": "bad parameter"
+          },
+          "500": {
+            "description": "server error"
+          }
+        },
+        "tags": [
+          "UptimeRobot"
+        ]
+      }
+    },
+    "/getAlertContacts": {
+      "get": {
+        "summary": "Get Alert Contacts",
+        "description": "The list of alert contacts can be called with this method.",
+        "operationId": "getAlertContacts",
+        "parameters": [
+          {
+            "name": "apiKey",
+            "in": "query",
+            "description": "API key",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response format",
+            "type": "string",
+            "default": "json",
+            "required": false
+          },
+          {
+            "name": "noJsonCallback",
+            "in": "query",
+            "description": "Return raw json",
+            "type": "string",
+            "default": "1",
+            "required": false
+          },
+          {
+            "name": "alertcontacts",
+            "in": "query",
+            "description": "if not used, will return all alert contacts in an account. Else, it is possible to define any number of alert contacts with their IDs like: alertcontacts=236-1782-4790",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "used for pagination. Defines the record to start paginating. Default is 0",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "used for pagination. Defines the max number of records to return for the response. Default and max. is 50",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "no error",
+            "schema": {
+              "$ref": "#/definitions/GetAlertContactsResponse"
+            }
+          },
+          "400": {
+            "description": "bad parameter"
+          },
+          "500": {
+            "description": "server error"
+          }
+        },
+        "tags": [
+          "UptimeRobot"
+        ]
+      }
+    },
+    "/newAlertContact": {
+      "get": {
+        "summary": "Create new alert contact",
+        "description": "New alert contacts of any type (mobile/SMS alert contacts are not supported yet) can be created using this method. The alert contacts created using the API are validated with the same way as they were created from uptimerobot.com (activation link for e-mails, tc.).",
+        "operationId": "newAlertContact",
+        "parameters": [
+          {
+            "name": "apiKey",
+            "in": "query",
+            "description": "API key",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response format",
+            "type": "string",
+            "default": "json",
+            "required": false
+          },
+          {
+            "name": "noJsonCallback",
+            "in": "query",
+            "description": "Return raw json",
+            "type": "string",
+            "default": "1",
+            "required": false
+          },
+          {
+            "name": "alertContactType",
+            "in": "query",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "alertContactValue",
+            "in": "query",
+            "description": "",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "alertContactFriendlyName",
+            "in": "query",
+            "description": "",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "no error",
+            "schema": {
+              "$ref": "#/definitions/AlertContactResponse"
+            }
+          },
+          "400": {
+            "description": "bad parameter"
+          },
+          "500": {
+            "description": "server error"
+          }
+        },
+        "tags": [
+          "UptimeRobot"
+        ]
+      }
+    },
+    "/deleteAlertContact": {
+      "get": {
+        "summary": "Delete Alert Contact",
+        "description": "Alert contacts can be deleted using this method.",
+        "operationId": "deleteAlertContact",
+        "parameters": [
+          {
+            "name": "apiKey",
+            "in": "query",
+            "description": "API key",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response format",
+            "type": "string",
+            "default": "json",
+            "required": false
+          },
+          {
+            "name": "noJsonCallback",
+            "in": "query",
+            "description": "Return raw json",
+            "type": "string",
+            "default": "1",
+            "required": false
+          },
+          {
+            "name": "alertContactID",
+            "in": "query",
+            "description": "ID of the alert contact to delete",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "no error",
+            "schema": {
+              "$ref": "#/definitions/AlertContactResponse"
+            }
+          },
+          "400": {
+            "description": "bad parameter"
+          },
+          "500": {
+            "description": "server error"
+          }
+        },
+        "tags": [
+          "UptimeRobot"
+        ]
+      }
+    }
+  }
+}
