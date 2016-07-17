@@ -15,6 +15,12 @@ Via Composer
 $ composer require montross50/uptime-robot-api
 ```
 
+Add service provider to app/config.php
+
+``` php
+ \Montross50\UptimeRobotApi\UptimeRobotApiServiceProvider::class
+```
+
 ## Usage
 
 ``` php
