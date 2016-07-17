@@ -1,10 +1,9 @@
 # Uptime Robot API
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Latest Version on Packagist][ico-version]](https://packagist.org/packages/montross50/uptime-robot-api)
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][https://travis-ci.org/montross50/UptimeRobotApi]
-[![Quality Score][ico-code-quality]][link-code-quality]
-[![Total Downloads][ico-downloads]][link-downloads]
+[![Build Status](https://img.shields.io/travis/montross50/UptimeRobotApi.svg?branch=master&style=flat-square)](https://travis-ci.org/montross50/UptimeRobotApi)
+[![Total Downloads](https://img.shields.io/packagist/dt/montross50/uptime-robot-api.svg?style=flat-square)](https://packagist.org/packages/montross50/uptime-robot-api)
 
 API wrapper for [UptimeRobot](https://uptimerobot.com)
 
