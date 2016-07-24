@@ -106,8 +106,18 @@ class UptimeRobotManager implements UptimeRobotResourceInterface {
         
         return $this->api->deleteAlertContact($parameters, $fetch);
     }
-    
-    
+
+    /**
+     * @inheritDoc
+     */
+    public function resetMonitor($parameters = array(), $fetch = self::FETCH_OBJECT)
+    {
+        $parameters = $this->mergeApiKey($parameters);
+
+        return $this->api->resetMonitor($parameters, $fetch);
+    }
+
+
     /**
      * @return UptimeRobotResource
      */
