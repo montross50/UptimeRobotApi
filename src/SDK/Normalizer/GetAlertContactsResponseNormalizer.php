@@ -47,11 +47,7 @@ class GetAlertContactsResponseNormalizer extends SerializerAwareNormalizer imple
             $object->setTotal($data->{'total'});
         }
         if (property_exists($data, 'alertcontacts')) {
-            $values = array();
-            foreach ($data->{'alertcontacts'} as $value) {
-                $values[] = $this->serializer->deserialize($value, 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContact', 'raw', $context);
-            }
-            $object->setAlertcontacts($values);
+            $object->setAlertcontacts($this->serializer->deserialize($data->{'alertcontacts'}, 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContactArray', 'raw', $context));
         }
         if (property_exists($data, 'id')) {
             $object->setId($data->{'id'});
@@ -77,11 +73,7 @@ class GetAlertContactsResponseNormalizer extends SerializerAwareNormalizer imple
             $data->{'total'} = $object->getTotal();
         }
         if (null !== $object->getAlertcontacts()) {
-            $values = array();
-            foreach ($object->getAlertcontacts() as $value) {
-                $values[] = $this->serializer->serialize($value, 'raw', $context);
-            }
-            $data->{'alertcontacts'} = $values;
+            $data->{'alertcontacts'} = $this->serializer->serialize($object->getAlertcontacts(), 'raw', $context);
         }
         if (null !== $object->getId()) {
             $data->{'id'} = $object->getId();

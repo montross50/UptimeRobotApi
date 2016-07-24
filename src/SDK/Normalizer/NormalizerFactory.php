@@ -20,6 +20,7 @@ class NormalizerFactory
         $normalizers[] = new ResponseTimeNormalizer();
         $normalizers[] = new MonitorResponseNormalizer();
         $normalizers[] = new GetAlertContactsResponseNormalizer();
+        $normalizers[] = new AlertContactArrayNormalizer();
         $normalizers[] = new AlertContactResponseNormalizer();
         $normalizers[] = new ErrorResponseNormalizer();
         return $normalizers;

@@ -21,7 +21,7 @@ class GetAlertContactsResponse
      */
     protected $total;
     /**
-     * @var AlertContact[]
+     * @var AlertContactArray
      */
     protected $alertcontacts;
     /**
@@ -101,18 +101,18 @@ class GetAlertContactsResponse
         return $this;
     }
     /**
-     * @return AlertContact[]
+     * @return AlertContactArray
      */
     public function getAlertcontacts()
     {
         return $this->alertcontacts;
     }
     /**
-     * @param AlertContact[] $alertcontacts
+     * @param AlertContactArray $alertcontacts
      *
      * @return self
      */
-    public function setAlertcontacts(array $alertcontacts = null)
+    public function setAlertcontacts(AlertContactArray $alertcontacts = null)
     {
         $this->alertcontacts = $alertcontacts;
         return $this;

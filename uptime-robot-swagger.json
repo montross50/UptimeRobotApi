@@ -230,16 +230,25 @@
           "type": "string"
         },
         "alertcontacts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AlertContact"
-          }
+          "type": "object",
+          "$ref": "#/definitions/AlertContactArray"
         },
         "id": {
           "type": "string"
         },
         "message": {
           "type": "string"
+        }
+      }
+    },
+    "AlertContactArray": {
+      "type": "object",
+      "properties": {
+        "alertcontact": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertContact"
+          }
         }
       }
     },
