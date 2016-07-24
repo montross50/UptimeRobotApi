@@ -28,11 +28,11 @@ $api = \App::make(UptimeRobotManager::class);
 echo $api->getMonitors();
 ```
 
+For uptime robot api reference [api](https://uptimerobot.com/api)
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
-
-For uptime robot api reference [api](https://uptimerobot.com/api)
 
 ## Contributing
 

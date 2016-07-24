@@ -38,7 +38,7 @@ class UptimeRobotApiServiceProvider extends ServiceProvider
     {
        $this->app->bind(UptimeRobotManager::class,function($app){
 
-            $client = $app->make(UptimeRobotClient::class);
+            $client = $app->make(UptimeRobotClient::class,[['base_url'=>$app['config']->get('uptimerobot.apiUrl')]]);
             $serializer = new Serializer(
                     NormalizerFactory::create(),
                     [
