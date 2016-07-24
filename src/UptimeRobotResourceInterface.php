@@ -157,6 +157,21 @@ interface UptimeRobotResourceInterface {
      * @return \Psr\Http\Message\ResponseInterface|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse
      */
     public function editMonitor($parameters = array(), $fetch = self::FETCH_OBJECT);
+
+    /**
+     * Monitors can be reset (deleting all stats and response time data) using this method.
+     *
+     * @param array  $parameters {
+     *     @var string $apiKey API key
+     *     @var string $format Response format
+     *     @var string $noJsonCallback Return raw json
+     *     @var string $monitorID ID of monitor to delete
+     * }
+     * @param string $fetch      Fetch mode (object or response)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse
+     */
+    public function resetMonitor($parameters = array(), $fetch = self::FETCH_OBJECT);
     
     /**
      * The list of alert contacts can be called with this method.

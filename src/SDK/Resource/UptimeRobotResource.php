@@ -4,9 +4,8 @@ namespace Montross50\UptimeRobotApi\SDK\Resource;
 
 use Joli\Jane\OpenApi\Client\QueryParam;
 use Joli\Jane\OpenApi\Client\Resource;
-use Montross50\UptimeRobotApi\UptimeRobotResourceInterface;
-
-class UptimeRobotResource extends Resource implements UptimeRobotResourceInterface {
+class UptimeRobotResource extends Resource
+{
     /**
      * Account details (max number of monitors that can be added and number of up/down/paused monitors) can be grabbed using this method.
      *
@@ -177,6 +176,39 @@ class UptimeRobotResource extends Resource implements UptimeRobotResourceInterfa
         $queryParam->setDefault('noJsonCallback', '1');
         $queryParam->setRequired('monitorID');
         $url = '/deleteMonitor';
+        $url = $url . ('?' . $queryParam->buildQueryString($parameters));
+        $headers = array_merge(array('Host' => 'api.uptimerobot.com'), $queryParam->buildHeaders($parameters));
+        $body = $queryParam->buildFormDataString($parameters);
+        $request = $this->messageFactory->createRequest('GET', $url, $headers, $body);
+        $response = $this->httpClient->sendRequest($request);
+        if (self::FETCH_OBJECT == $fetch) {
+            if ('200' == $response->getStatusCode()) {
+                return $this->serializer->deserialize((string) $response->getBody(), 'Montross50\\UptimeRobotApi\\SDK\\Model\\MonitorResponse', 'json');
+            }
+        }
+        return $response;
+    }
+    /**
+     * Monitors can be reset (deleting all stats and response time data) using this method.
+     *
+     * @param array  $parameters {
+     *     @var string $apiKey API key
+     *     @var string $format Response format
+     *     @var string $noJsonCallback Return raw json
+     *     @var string $monitorID ID of monitor to delete
+     * }
+     * @param string $fetch      Fetch mode (object or response)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse
+     */
+    public function resetMonitor($parameters = array(), $fetch = self::FETCH_OBJECT)
+    {
+        $queryParam = new QueryParam();
+        $queryParam->setRequired('apiKey');
+        $queryParam->setDefault('format', 'json');
+        $queryParam->setDefault('noJsonCallback', '1');
+        $queryParam->setRequired('monitorID');
+        $url = '/resetMonitor';
         $url = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers = array_merge(array('Host' => 'api.uptimerobot.com'), $queryParam->buildHeaders($parameters));
         $body = $queryParam->buildFormDataString($parameters);
