@@ -40,6 +40,12 @@ class AlertContactResponseNormalizer extends SerializerAwareNormalizer implement
         if (property_exists($data, 'alertcontact')) {
             $object->setAlertcontact($this->serializer->deserialize($data->{'alertcontact'}, 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContact', 'raw', $context));
         }
+        if (property_exists($data, 'id')) {
+            $object->setId($data->{'id'});
+        }
+        if (property_exists($data, 'message')) {
+            $object->setMessage($data->{'message'});
+        }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
@@ -50,6 +56,12 @@ class AlertContactResponseNormalizer extends SerializerAwareNormalizer implement
         }
         if (null !== $object->getAlertcontact()) {
             $data->{'alertcontact'} = $this->serializer->serialize($object->getAlertcontact(), 'raw', $context);
+        }
+        if (null !== $object->getId()) {
+            $data->{'id'} = $object->getId();
+        }
+        if (null !== $object->getMessage()) {
+            $data->{'message'} = $object->getMessage();
         }
         return $data;
     }

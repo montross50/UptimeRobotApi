@@ -1,8 +1,8 @@
 <?php
+
 namespace Montross50\UptimeRobotApi;
 
 interface UptimeRobotResourceInterface {
-    
     /**
      * Account details (max number of monitors that can be added and number of up/down/paused monitors) can be grabbed
      * using this method.

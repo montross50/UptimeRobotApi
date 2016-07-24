@@ -27,6 +27,12 @@
         "account": {
           "$ref": "#/definitions/Account"
         }
+      },
+      "id": {
+        "type": "string"
+      },
+      "message": {
+        "type": "string"
       }
     },
     "Account": {
@@ -69,6 +75,12 @@
           "items": {
             "$ref": "#/definitions/Monitor"
           }
+        },
+        "id": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
         }
       }
     },
@@ -193,6 +205,12 @@
         },
         "monitor": {
           "$ref": "#/definitions/Monitor"
+        },
+        "id": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
         }
       }
     },
@@ -216,6 +234,12 @@
           "items": {
             "$ref": "#/definitions/AlertContact"
           }
+        },
+        "id": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
         }
       }
     },
@@ -227,6 +251,12 @@
         },
         "alertcontact": {
           "$ref": "#/definitions/AlertContact"
+        },
+        "id": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
         }
       }
     },

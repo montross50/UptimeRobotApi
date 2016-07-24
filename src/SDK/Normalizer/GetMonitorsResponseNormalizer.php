@@ -53,6 +53,12 @@ class GetMonitorsResponseNormalizer extends SerializerAwareNormalizer implements
             }
             $object->setMonitors($values);
         }
+        if (property_exists($data, 'id')) {
+            $object->setId($data->{'id'});
+        }
+        if (property_exists($data, 'message')) {
+            $object->setMessage($data->{'message'});
+        }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
@@ -76,6 +82,12 @@ class GetMonitorsResponseNormalizer extends SerializerAwareNormalizer implements
                 $values[] = $this->serializer->serialize($value, 'raw', $context);
             }
             $data->{'monitors'} = $values;
+        }
+        if (null !== $object->getId()) {
+            $data->{'id'} = $object->getId();
+        }
+        if (null !== $object->getMessage()) {
+            $data->{'message'} = $object->getMessage();
         }
         return $data;
     }

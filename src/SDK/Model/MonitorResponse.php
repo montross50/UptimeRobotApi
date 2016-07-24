@@ -13,6 +13,14 @@ class MonitorResponse
      */
     protected $monitor;
     /**
+     * @var string
+     */
+    protected $id;
+    /**
+     * @var string
+     */
+    protected $message;
+    /**
      * @return string
      */
     public function getStat()
@@ -44,6 +52,40 @@ class MonitorResponse
     public function setMonitor(Monitor $monitor = null)
     {
         $this->monitor = $monitor;
+        return $this;
+    }
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    /**
+     * @param string $id
+     *
+     * @return self
+     */
+    public function setId($id = null)
+    {
+        $this->id = $id;
+        return $this;
+    }
+    /**
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+    /**
+     * @param string $message
+     *
+     * @return self
+     */
+    public function setMessage($message = null)
+    {
+        $this->message = $message;
         return $this;
     }
 }

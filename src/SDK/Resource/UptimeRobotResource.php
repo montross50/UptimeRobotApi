@@ -6,8 +6,7 @@ use Joli\Jane\OpenApi\Client\QueryParam;
 use Joli\Jane\OpenApi\Client\Resource;
 use Montross50\UptimeRobotApi\UptimeRobotResourceInterface;
 
-class UptimeRobotResource extends Resource implements UptimeRobotResourceInterface
-{
+class UptimeRobotResource extends Resource implements UptimeRobotResourceInterface {
     /**
      * Account details (max number of monitors that can be added and number of up/down/paused monitors) can be grabbed using this method.
      *
@@ -105,28 +104,28 @@ class UptimeRobotResource extends Resource implements UptimeRobotResourceInterfa
         return $response;
     }
     /**
- * New monitors of any type can be created using this method.
- *
- * @param array  $parameters {
- *     @var string $apiKey API key
- *     @var string $format Response format
- *     @var string $noJsonCallback Return raw json
- *     @var string $monitorFriendlyName name of monitor
- *     @var string $monitorURL URL to monitor
- *     @var string $monitorType type of monitor
- *     @var string $monitorSubType required for port monitoring
- *     @var string $monitorPort required for port monitoring
- *     @var string $monitorKeywordType required for keyword monitoring
- *     @var string $monitorKeywordValue required for keyword monitoring
- *     @var string $monitorHTTPUsername
- *     @var string $monitorHTTPPassword
- *     @var string $monitorAlertContacts the alert contacts to be notified when the monitor goes up/down.Multiple alertContactIDs can be sent like monitorAlertContacts=457_0_0-373_5_0-8956_2_3 where alertContactIDs are seperated with - and threshold + recurrence are seperated with _. For ex: monitorAlertContacts=457_5_0 refers to 457 being the alertContactID, 0 being the threshold and 0 being the recurrence. As the threshold and recurrence is only available in the Pro Plan, they are always 0 in the Free Plan)
- *     @var string $monitorInterval in minutes
- * }
- * @param string $fetch      Fetch mode (object or response)
- *
- * @return \Psr\Http\Message\ResponseInterface|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse
- */
+     * New monitors of any type can be created using this method.
+     *
+     * @param array  $parameters {
+     *     @var string $apiKey API key
+     *     @var string $format Response format
+     *     @var string $noJsonCallback Return raw json
+     *     @var string $monitorFriendlyName name of monitor
+     *     @var string $monitorURL URL to monitor
+     *     @var string $monitorType type of monitor
+     *     @var string $monitorSubType required for port monitoring
+     *     @var string $monitorPort required for port monitoring
+     *     @var string $monitorKeywordType required for keyword monitoring
+     *     @var string $monitorKeywordValue required for keyword monitoring
+     *     @var string $monitorHTTPUsername 
+     *     @var string $monitorHTTPPassword 
+     *     @var string $monitorAlertContacts the alert contacts to be notified when the monitor goes up/down.Multiple alertContactIDs can be sent like monitorAlertContacts=457_0_0-373_5_0-8956_2_3 where alertContactIDs are seperated with - and threshold + recurrence are seperated with _. For ex: monitorAlertContacts=457_5_0 refers to 457 being the alertContactID, 0 being the threshold and 0 being the recurrence. As the threshold and recurrence is only available in the Pro Plan, they are always 0 in the Free Plan)
+     *     @var string $monitorInterval in minutes
+     * }
+     * @param string $fetch      Fetch mode (object or response)
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse
+     */
     public function createMonitor($parameters = array(), $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();

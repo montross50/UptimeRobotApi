@@ -40,6 +40,12 @@ class MonitorResponseNormalizer extends SerializerAwareNormalizer implements Den
         if (property_exists($data, 'monitor')) {
             $object->setMonitor($this->serializer->deserialize($data->{'monitor'}, 'Montross50\\UptimeRobotApi\\SDK\\Model\\Monitor', 'raw', $context));
         }
+        if (property_exists($data, 'id')) {
+            $object->setId($data->{'id'});
+        }
+        if (property_exists($data, 'message')) {
+            $object->setMessage($data->{'message'});
+        }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
@@ -50,6 +56,12 @@ class MonitorResponseNormalizer extends SerializerAwareNormalizer implements Den
         }
         if (null !== $object->getMonitor()) {
             $data->{'monitor'} = $this->serializer->serialize($object->getMonitor(), 'raw', $context);
+        }
+        if (null !== $object->getId()) {
+            $data->{'id'} = $object->getId();
+        }
+        if (null !== $object->getMessage()) {
+            $data->{'message'} = $object->getMessage();
         }
         return $data;
     }
