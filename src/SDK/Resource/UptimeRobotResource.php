@@ -4,7 +4,9 @@ namespace Montross50\UptimeRobotApi\SDK\Resource;
 
 use Joli\Jane\OpenApi\Client\QueryParam;
 use Joli\Jane\OpenApi\Client\Resource;
-class UptimeRobotResource extends Resource
+use Montross50\UptimeRobotApi\UptimeRobotResourceInterface;
+
+class UptimeRobotResource extends Resource implements UptimeRobotResourceInterface
 {
     /**
      * Account details (max number of monitors that can be added and number of up/down/paused monitors) can be grabbed using this method.

@@ -14,6 +14,7 @@ class NormalizerFactory
         $normalizers[] = new AccountDetailsNormalizer();
         $normalizers[] = new AccountNormalizer();
         $normalizers[] = new GetMonitorsResponseNormalizer();
+        $normalizers[] = new MonitorArrayNormalizer();
         $normalizers[] = new MonitorNormalizer();
         $normalizers[] = new AlertContactNormalizer();
         $normalizers[] = new LogNormalizer();

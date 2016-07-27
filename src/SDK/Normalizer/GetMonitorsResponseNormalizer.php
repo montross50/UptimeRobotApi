@@ -49,7 +49,7 @@ class GetMonitorsResponseNormalizer extends SerializerAwareNormalizer implements
         if (property_exists($data, 'monitors')) {
             $values = array();
             foreach ($data->{'monitors'} as $value) {
-                $values[] = $this->serializer->deserialize($value, 'Montross50\\UptimeRobotApi\\SDK\\Model\\Monitor', 'raw', $context);
+                $values[] = $this->serializer->deserialize($value, 'Montross50\\UptimeRobotApi\\SDK\\Model\\MonitorArray', 'raw', $context);
             }
             $object->setMonitors($values);
         }

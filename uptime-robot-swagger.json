@@ -73,7 +73,7 @@
         "monitors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Monitor"
+            "$ref": "#/definitions/MonitorArray"
           }
         },
         "id": {
@@ -81,6 +81,17 @@
         },
         "message": {
           "type": "string"
+        }
+      }
+    },
+    "MonitorArray": {
+      "type": "object",
+      "properties": {
+        "monitor": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Monitor"
+          }
         }
       }
     },
