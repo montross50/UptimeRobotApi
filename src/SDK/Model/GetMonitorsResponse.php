@@ -21,7 +21,7 @@ class GetMonitorsResponse
      */
     protected $total;
     /**
-     * @var MonitorArray[]
+     * @var MonitorArray
      */
     protected $monitors;
     /**
@@ -101,18 +101,18 @@ class GetMonitorsResponse
         return $this;
     }
     /**
-     * @return MonitorArray[]
+     * @return MonitorArray
      */
     public function getMonitors()
     {
         return $this->monitors;
     }
     /**
-     * @param MonitorArray[] $monitors
+     * @param MonitorArray $monitors
      *
      * @return self
      */
-    public function setMonitors(array $monitors = null)
+    public function setMonitors(MonitorArray $monitors = null)
     {
         $this->monitors = $monitors;
         return $this;

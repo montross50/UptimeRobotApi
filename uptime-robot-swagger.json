@@ -71,10 +71,7 @@
           "type": "string"
         },
         "monitors": {
-          "type": "array",
-          "items": {
             "$ref": "#/definitions/MonitorArray"
-          }
         },
         "id": {
           "type": "string"

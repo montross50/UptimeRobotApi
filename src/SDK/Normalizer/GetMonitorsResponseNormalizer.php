@@ -47,11 +47,7 @@ class GetMonitorsResponseNormalizer extends SerializerAwareNormalizer implements
             $object->setTotal($data->{'total'});
         }
         if (property_exists($data, 'monitors')) {
-            $values = array();
-            foreach ($data->{'monitors'} as $value) {
-                $values[] = $this->serializer->deserialize($value, 'Montross50\\UptimeRobotApi\\SDK\\Model\\MonitorArray', 'raw', $context);
-            }
-            $object->setMonitors($values);
+            $object->setMonitors($this->serializer->deserialize($data->{'monitors'}, 'Montross50\\UptimeRobotApi\\SDK\\Model\\MonitorArray', 'raw', $context));
         }
         if (property_exists($data, 'id')) {
             $object->setId($data->{'id'});
@@ -77,11 +73,7 @@ class GetMonitorsResponseNormalizer extends SerializerAwareNormalizer implements
             $data->{'total'} = $object->getTotal();
         }
         if (null !== $object->getMonitors()) {
-            $values = array();
-            foreach ($object->getMonitors() as $value) {
-                $values[] = $this->serializer->serialize($value, 'raw', $context);
-            }
-            $data->{'monitors'} = $values;
+            $data->{'monitors'} = $this->serializer->serialize($object->getMonitors(), 'raw', $context);
         }
         if (null !== $object->getId()) {
             $data->{'id'} = $object->getId();
