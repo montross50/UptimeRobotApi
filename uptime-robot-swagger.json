@@ -724,7 +724,7 @@
           {
             "name": "monitorID",
             "in": "query",
-            "description": "ID of monitor to delete",
+            "description": "ID of monitor to reset",
             "type": "string",
             "required": true
           }
@@ -853,6 +853,13 @@
             "description": "in minutes",
             "type": "string",
             "required": false
+          },
+          {
+            "name": "monitorID",
+            "in": "query",
+            "description": "ID of monitor to edit",
+            "type": "string",
+            "required": true
           }
         ],
         "responses": {

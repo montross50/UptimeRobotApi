@@ -197,7 +197,7 @@ class UptimeRobotResource extends Resource implements UptimeRobotResourceInterfa
      *     @var string $apiKey API key
      *     @var string $format Response format
      *     @var string $noJsonCallback Return raw json
-     *     @var string $monitorID ID of monitor to delete
+     *     @var string $monitorID ID of monitor to reset
      * }
      * @param string $fetch      Fetch mode (object or response)
      *
@@ -241,6 +241,7 @@ class UptimeRobotResource extends Resource implements UptimeRobotResourceInterfa
      *     @var string $monitorHTTPPassword in order to remove any previously added password, simply send the value empty like monitorHTTPPassword=)
      *     @var string $monitorAlertContacts the alert contacts to be notified when the monitor goes up/down.Multiple alertContactIDs can be sent like monitorAlertContacts=457_0_0-373_5_0-8956_2_3 where alertContactIDs are seperated with - and threshold + recurrence are seperated with _. For ex: monitorAlertContacts=457_5_0 refers to 457 being the alertContactID, 0 being the threshold and 0 being the recurrence. As the threshold and recurrence is only available in the Pro Plan, they are always 0 in the Free Plan) (in order to remove any previously added alert contacts, simply send the value empty like monitorAlertContacts=
      *     @var string $monitorInterval in minutes
+     *     @var string $monitorID ID of monitor to edit
      * }
      * @param string $fetch      Fetch mode (object or response)
      *
@@ -263,6 +264,7 @@ class UptimeRobotResource extends Resource implements UptimeRobotResourceInterfa
         $queryParam->setDefault('monitorHTTPPassword', NULL);
         $queryParam->setDefault('monitorAlertContacts', NULL);
         $queryParam->setDefault('monitorInterval', NULL);
+        $queryParam->setRequired('monitorID');
         $url = '/editMonitor';
         $url = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers = array_merge(array('Host' => 'api.uptimerobot.com'), $queryParam->buildHeaders($parameters));
