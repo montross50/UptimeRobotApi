@@ -169,6 +169,9 @@
         "value": {
           "type": "string"
         },
+        "friendlyname": {
+          "type": "string"
+        },
         "threshold": {
           "type": "string"
         },

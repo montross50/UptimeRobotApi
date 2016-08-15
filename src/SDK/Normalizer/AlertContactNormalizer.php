@@ -43,6 +43,9 @@ class AlertContactNormalizer extends SerializerAwareNormalizer implements Denorm
         if (property_exists($data, 'value')) {
             $object->setValue($data->{'value'});
         }
+        if (property_exists($data, 'friendlyname')) {
+            $object->setFriendlyname($data->{'friendlyname'});
+        }
         if (property_exists($data, 'threshold')) {
             $object->setThreshold($data->{'threshold'});
         }
@@ -62,6 +65,9 @@ class AlertContactNormalizer extends SerializerAwareNormalizer implements Denorm
         }
         if (null !== $object->getValue()) {
             $data->{'value'} = $object->getValue();
+        }
+        if (null !== $object->getFriendlyname()) {
+            $data->{'friendlyname'} = $object->getFriendlyname();
         }
         if (null !== $object->getThreshold()) {
             $data->{'threshold'} = $object->getThreshold();

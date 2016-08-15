@@ -19,6 +19,10 @@ class AlertContact
     /**
      * @var string
      */
+    protected $friendlyname;
+    /**
+     * @var string
+     */
     protected $threshold;
     /**
      * @var string
@@ -73,6 +77,23 @@ class AlertContact
     public function setValue($value = null)
     {
         $this->value = $value;
+        return $this;
+    }
+    /**
+     * @return string
+     */
+    public function getFriendlyname()
+    {
+        return $this->friendlyname;
+    }
+    /**
+     * @param string $friendlyname
+     *
+     * @return self
+     */
+    public function setFriendlyname($friendlyname = null)
+    {
+        $this->friendlyname = $friendlyname;
         return $this;
     }
     /**
