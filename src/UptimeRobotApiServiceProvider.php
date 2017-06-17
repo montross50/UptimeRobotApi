@@ -38,7 +38,7 @@ class UptimeRobotApiServiceProvider extends ServiceProvider
     {
        $this->app->bind(UptimeRobotManager::class,function($app){
 
-            $client = $app->make(UptimeRobotClient::class,[['base_url'=>$app['config']->get('uptimerobot.apiUrl')]]);
+            $client = app(UptimeRobotClient::class,['options'=>['base_url'=>config('uptimerobot.apiUrl')]]);
             $serializer = new Serializer(
                     NormalizerFactory::create(),
                     [
@@ -52,7 +52,7 @@ class UptimeRobotApiServiceProvider extends ServiceProvider
             $messageFactory = new GuzzleMessageFactory();
             $api = new UptimeRobotResource($client,$messageFactory,$serializer);
             $urm = new UptimeRobotManager($api);
-            $apiKey = $app['config']->get('uptimerobot.apiKey', '');
+            $apiKey = config('uptimerobot.apiKey', '');
             $urm->setApiKey($apiKey);
             return $urm;
         });
