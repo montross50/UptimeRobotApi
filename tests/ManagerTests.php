@@ -1,5 +1,6 @@
 <?php
 namespace Montross50\UptimeRobotApi;
+use Montross50\UptimeRobotApi\SDK\Model\GetMonitorsResponse;
 
 /**
  * Created by PhpStorm.
@@ -45,4 +46,13 @@ class ManagerTests extends TestCase{
         $this->assertArrayHasKey('apiKey',$params);
         $this->assertEquals('bar',$params['apiKey']);
     }
+/**
+    public function testGetMonitors()
+    {
+
+        $api = app(UptimeRobotManager::class);
+        $monitors = $api->getMonitors();
+        $this->assertInstanceOf(GetMonitorsResponse::class,$monitors);
+    }
+    **/
 }

@@ -16,8 +16,7 @@ class UptimeRobotClient implements HttpClient
     
     public function __construct($options = [])
     {
-        $messageFactory = new GuzzleMessageFactory();
-        $client = new \Http\Adapter\Guzzle5\Client(new Client($options),$messageFactory);
+        $client =  \Http\Adapter\Guzzle6\Client::createWithConfig($options);
         
         $this->httpClient = $client;
     }
