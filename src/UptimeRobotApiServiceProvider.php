@@ -36,7 +36,7 @@ class UptimeRobotApiServiceProvider extends ServiceProvider
      */
     public function register()
     {
-       $this->app->bind(UptimeRobotManager::class,function($app){
+       $this->app->bind(UptimeRobotResourceInterface::class,function($app){
 
             $client = app(UptimeRobotClient::class,['options'=>['base_uri'=>config('uptimerobot.apiUrl')]]);
             $serializer = new Serializer(

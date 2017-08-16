@@ -17,7 +17,7 @@ class ManagerTests extends TestCase{
         /**
          * @var $api UptimeRobotManager
          */
-        $api = \App::make(UptimeRobotManager::class);
+        $api = \App::make(UptimeRobotResourceInterface::class);
         $this->assertEquals($key,$api->getApiKey());
     }
     
@@ -28,7 +28,7 @@ class ManagerTests extends TestCase{
         /**
          * @var $api UptimeRobotManager
          */
-        $api = \App::make(UptimeRobotManager::class);
+        $api = \App::make(UptimeRobotResourceInterface::class);
         $params = $api->mergeApiKey([]);
         $this->assertArrayHasKey('apiKey',$params);
         $this->assertEquals($key,$params['apiKey']);
@@ -41,7 +41,7 @@ class ManagerTests extends TestCase{
         /**
          * @var $api UptimeRobotManager
          */
-        $api = \App::make(UptimeRobotManager::class);
+        $api = \App::make(UptimeRobotResourceInterface::class);
         $params = $api->mergeApiKey(['apiKey'=>'bar']);
         $this->assertArrayHasKey('apiKey',$params);
         $this->assertEquals('bar',$params['apiKey']);
