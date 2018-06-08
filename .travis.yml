@@ -1,24 +1,29 @@
+dist: trusty
 language: php
-sudo: required
 
+php:
+  - 7.1
+  - 7.2
+
+# This triggers builds to run on the new TravisCI infrastructure.
+# See: http://docs.travis-ci.com/user/workers/container-based-infrastructure/
+sudo: false
+
+## Cache composer
 cache:
   directories:
     - $HOME/.composer/cache
 
-php:
-  - 5.6
-  - 7.0
-
-env:
-  global:
-    - TEST_COMMAND="composer test"
-
-before_install:
-  - travis_retry composer self-update
-
-install:
-  - travis_retry composer install -o ${COMPOSER_FLAGS} --prefer-source --no-interaction
+before_script:
+  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
 
 script:
-  - $TEST_COMMAND
+  - vendor/bin/phpcs --standard=psr2 src/
+  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
+after_script:
+  - |
+    if [[ "$TRAVIS_PHP_VERSION" != 'hhvm' && "$TRAVIS_PHP_VERSION" != '7.0' ]]; then
+      wget https://scrutinizer-ci.com/ocular.phar
+      php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+    fi

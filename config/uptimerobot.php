@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'apiKey' => 'u346620-e7a264f28cebe11cb20ca8f8',
-    'apiUrl' => 'https://api.uptimerobot.com'
+    'apiKey' => env('UPTIMEROBOT_API_KEY'),
+    'apiUrl' => env('UPTIMEROBOT_API_URL','https://api.uptimerobot.com')
 ];

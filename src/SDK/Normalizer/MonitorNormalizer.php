@@ -2,38 +2,32 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Normalizer;
 
-use Joli\Jane\Reference\Reference;
+use Jane\JsonSchemaRuntime\Reference;
+use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
-class MonitorNormalizer extends SerializerAwareNormalizer implements DenormalizerInterface, NormalizerInterface
+class MonitorNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
+    use DenormalizerAwareTrait;
+    use NormalizerAwareTrait;
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'Montross50\\UptimeRobotApi\\SDK\\Model\\Monitor') {
-            return false;
-        }
-        return true;
+        return $type === 'Montross50\\UptimeRobotApi\\SDK\\Model\\Monitor';
     }
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \Montross50\UptimeRobotApi\SDK\Model\Monitor) {
-            return true;
-        }
-        return false;
+        return $data instanceof \Montross50\UptimeRobotApi\SDK\Model\Monitor;
     }
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (empty($data)) {
-            return null;
-        }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
+        if (!is_object($data)) {
+            throw new InvalidArgumentException();
         }
         $object = new \Montross50\UptimeRobotApi\SDK\Model\Monitor();
-        if (!isset($context['rootSchema'])) {
-            $context['rootSchema'] = $object;
-        }
         if (property_exists($data, 'id')) {
             $object->setId($data->{'id'});
         }
@@ -79,21 +73,21 @@ class MonitorNormalizer extends SerializerAwareNormalizer implements Denormalize
         if (property_exists($data, 'alertcontact')) {
             $values = array();
             foreach ($data->{'alertcontact'} as $value) {
-                $values[] = $this->serializer->deserialize($value, 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContact', 'raw', $context);
+                $values[] = $this->denormalizer->denormalize($value, 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContact', 'json', $context);
             }
             $object->setAlertcontact($values);
         }
         if (property_exists($data, 'log')) {
             $values_1 = array();
             foreach ($data->{'log'} as $value_1) {
-                $values_1[] = $this->serializer->deserialize($value_1, 'Montross50\\UptimeRobotApi\\SDK\\Model\\Log', 'raw', $context);
+                $values_1[] = $this->denormalizer->denormalize($value_1, 'Montross50\\UptimeRobotApi\\SDK\\Model\\Log', 'json', $context);
             }
             $object->setLog($values_1);
         }
         if (property_exists($data, 'responsetime')) {
             $values_2 = array();
             foreach ($data->{'responsetime'} as $value_2) {
-                $values_2[] = $this->serializer->deserialize($value_2, 'Montross50\\UptimeRobotApi\\SDK\\Model\\ResponseTime', 'raw', $context);
+                $values_2[] = $this->denormalizer->denormalize($value_2, 'Montross50\\UptimeRobotApi\\SDK\\Model\\ResponseTime', 'json', $context);
             }
             $object->setResponsetime($values_2);
         }
@@ -147,21 +141,21 @@ class MonitorNormalizer extends SerializerAwareNormalizer implements Denormalize
         if (null !== $object->getAlertcontact()) {
             $values = array();
             foreach ($object->getAlertcontact() as $value) {
-                $values[] = $this->serializer->serialize($value, 'raw', $context);
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
             $data->{'alertcontact'} = $values;
         }
         if (null !== $object->getLog()) {
             $values_1 = array();
             foreach ($object->getLog() as $value_1) {
-                $values_1[] = $this->serializer->serialize($value_1, 'raw', $context);
+                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
             }
             $data->{'log'} = $values_1;
         }
         if (null !== $object->getResponsetime()) {
             $values_2 = array();
             foreach ($object->getResponsetime() as $value_2) {
-                $values_2[] = $this->serializer->serialize($value_2, 'raw', $context);
+                $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
             }
             $data->{'responsetime'} = $values_2;
         }

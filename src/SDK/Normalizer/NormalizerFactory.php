@@ -2,15 +2,12 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Normalizer;
 
-use Joli\Jane\Normalizer\ReferenceNormalizer;
-use Joli\Jane\Normalizer\NormalizerArray;
 class NormalizerFactory
 {
     public static function create()
     {
         $normalizers = array();
-        $normalizers[] = new ReferenceNormalizer();
-        $normalizers[] = new NormalizerArray();
+        $normalizers[] = new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer();
         $normalizers[] = new AccountDetailsNormalizer();
         $normalizers[] = new AccountNormalizer();
         $normalizers[] = new GetMonitorsResponseNormalizer();

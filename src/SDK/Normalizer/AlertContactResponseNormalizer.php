@@ -2,43 +2,37 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Normalizer;
 
-use Joli\Jane\Reference\Reference;
+use Jane\JsonSchemaRuntime\Reference;
+use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
-class AlertContactResponseNormalizer extends SerializerAwareNormalizer implements DenormalizerInterface, NormalizerInterface
+class AlertContactResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
+    use DenormalizerAwareTrait;
+    use NormalizerAwareTrait;
     public function supportsDenormalization($data, $type, $format = null)
     {
-        if ($type !== 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContactResponse') {
-            return false;
-        }
-        return true;
+        return $type === 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContactResponse';
     }
     public function supportsNormalization($data, $format = null)
     {
-        if ($data instanceof \Montross50\UptimeRobotApi\SDK\Model\AlertContactResponse) {
-            return true;
-        }
-        return false;
+        return $data instanceof \Montross50\UptimeRobotApi\SDK\Model\AlertContactResponse;
     }
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (empty($data)) {
-            return null;
-        }
-        if (isset($data->{'$ref'})) {
-            return new Reference($data->{'$ref'}, $context['rootSchema'] ?: null);
+        if (!is_object($data)) {
+            throw new InvalidArgumentException();
         }
         $object = new \Montross50\UptimeRobotApi\SDK\Model\AlertContactResponse();
-        if (!isset($context['rootSchema'])) {
-            $context['rootSchema'] = $object;
-        }
         if (property_exists($data, 'stat')) {
             $object->setStat($data->{'stat'});
         }
         if (property_exists($data, 'alertcontact')) {
-            $object->setAlertcontact($this->serializer->deserialize($data->{'alertcontact'}, 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContact', 'raw', $context));
+            $object->setAlertcontact($this->denormalizer->denormalize($data->{'alertcontact'}, 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContact', 'json', $context));
         }
         if (property_exists($data, 'id')) {
             $object->setId($data->{'id'});
@@ -55,7 +49,7 @@ class AlertContactResponseNormalizer extends SerializerAwareNormalizer implement
             $data->{'stat'} = $object->getStat();
         }
         if (null !== $object->getAlertcontact()) {
-            $data->{'alertcontact'} = $this->serializer->serialize($object->getAlertcontact(), 'raw', $context);
+            $data->{'alertcontact'} = $this->normalizer->normalize($object->getAlertcontact(), 'json', $context);
         }
         if (null !== $object->getId()) {
             $data->{'id'} = $object->getId();

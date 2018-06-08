@@ -2,22 +2,23 @@
 
 namespace Montross50\UptimeRobotApi;
 
-use Montross50\UptimeRobotApi\SDK\Resource\UptimeRobotResource;
+use Montross50\UptimeRobotApi\SDK\Client;
 
-class UptimeRobotManager implements UptimeRobotResourceInterface {
+class UptimeRobotManager implements UptimeRobotResourceInterface
+{
     
     const FETCH_OBJECT = 'object';
     /**
-     * @var UptimeRobotResource
+     * @var Client
      */
     private $api;
     private $apiKey;
     
     /**
      * UptimeRobotManager constructor.
-     * @param UptimeRobotResource $api
+     * @param Client $api
      */
-    public function __construct(UptimeRobotResource $api)
+    public function __construct(Client $api)
     {
         $this->api = $api;
     }
@@ -30,7 +31,7 @@ class UptimeRobotManager implements UptimeRobotResourceInterface {
     /**
      * @inheritDoc
      */
-    public function getAccountDetails($parameters = array(), $fetch = self::FETCH_OBJECT)
+    public function getAccountDetails(array $parameters = array(), string $fetch = self::FETCH_OBJECT)
     {
         $parameters = $this->mergeApiKey($parameters);
         
@@ -40,7 +41,7 @@ class UptimeRobotManager implements UptimeRobotResourceInterface {
     /**
      * @inheritDoc
      */
-    public function getMonitors($parameters = array(), $fetch = self::FETCH_OBJECT)
+    public function getMonitors(array $parameters = array(), string $fetch = self::FETCH_OBJECT)
     {
         $parameters = $this->mergeApiKey($parameters);
         
@@ -50,7 +51,7 @@ class UptimeRobotManager implements UptimeRobotResourceInterface {
     /**
      * @inheritDoc
      */
-    public function createMonitor($parameters = array(), $fetch = self::FETCH_OBJECT)
+    public function createMonitor(array $parameters = array(), string $fetch = self::FETCH_OBJECT)
     {
         $parameters = $this->mergeApiKey($parameters);
         
@@ -60,7 +61,7 @@ class UptimeRobotManager implements UptimeRobotResourceInterface {
     /**
      * @inheritDoc
      */
-    public function deleteMonitor($parameters = array(), $fetch = self::FETCH_OBJECT)
+    public function deleteMonitor(array $parameters = array(), string $fetch = self::FETCH_OBJECT)
     {
         $parameters = $this->mergeApiKey($parameters);
         
@@ -70,7 +71,7 @@ class UptimeRobotManager implements UptimeRobotResourceInterface {
     /**
      * @inheritDoc
      */
-    public function editMonitor($parameters = array(), $fetch = self::FETCH_OBJECT)
+    public function editMonitor(array $parameters = array(), string $fetch = self::FETCH_OBJECT)
     {
         $parameters = $this->mergeApiKey($parameters);
         
@@ -80,7 +81,7 @@ class UptimeRobotManager implements UptimeRobotResourceInterface {
     /**
      * @inheritDoc
      */
-    public function getAlertContacts($parameters = array(), $fetch = self::FETCH_OBJECT)
+    public function getAlertContacts(array $parameters = array(), string $fetch = self::FETCH_OBJECT)
     {
         $parameters = $this->mergeApiKey($parameters);
         
@@ -90,7 +91,7 @@ class UptimeRobotManager implements UptimeRobotResourceInterface {
     /**
      * @inheritDoc
      */
-    public function newAlertContact($parameters = array(), $fetch = self::FETCH_OBJECT)
+    public function newAlertContact(array $parameters = array(), string $fetch = self::FETCH_OBJECT)
     {
         $parameters = $this->mergeApiKey($parameters);
         
@@ -100,7 +101,7 @@ class UptimeRobotManager implements UptimeRobotResourceInterface {
     /**
      * @inheritDoc
      */
-    public function deleteAlertContact($parameters = array(), $fetch = self::FETCH_OBJECT)
+    public function deleteAlertContact(array $parameters = array(), string $fetch = self::FETCH_OBJECT)
     {
         $parameters = $this->mergeApiKey($parameters);
         
@@ -110,7 +111,7 @@ class UptimeRobotManager implements UptimeRobotResourceInterface {
     /**
      * @inheritDoc
      */
-    public function resetMonitor($parameters = array(), $fetch = self::FETCH_OBJECT)
+    public function resetMonitor(array $parameters = array(), string $fetch = self::FETCH_OBJECT)
     {
         $parameters = $this->mergeApiKey($parameters);
 
@@ -156,12 +157,10 @@ class UptimeRobotManager implements UptimeRobotResourceInterface {
      */
     public function mergeApiKey($parameters)
     {
-        if ( ! isset($parameters['apiKey']) ) {
+        if (! isset($parameters['apiKey'])) {
             $parameters['apiKey'] = $this->getApiKey();
         }
         
         return $parameters;
     }
-    
-    
 }

@@ -2,15 +2,8 @@
 
 namespace Montross50\UptimeRobotApi;
 
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Illuminate\Support\ServiceProvider;
-use Joli\Jane\Encoder\RawEncoder;
-use Montross50\UptimeRobotApi\SDK\Normalizer\NormalizerFactory;
-use Montross50\UptimeRobotApi\SDK\Resource\UptimeRobotResource;
-use Symfony\Component\Serializer\Encoder\JsonDecode;
-use Symfony\Component\Serializer\Encoder\JsonEncode;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Serializer;
+use Montross50\UptimeRobotApi\SDK\Client;
 
 class UptimeRobotApiServiceProvider extends ServiceProvider
 {
@@ -24,9 +17,7 @@ class UptimeRobotApiServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/uptimerobot.php' => config_path('uptimerobot.php'),
         ]);
-        $this->mergeConfigFrom(
-            __DIR__ . '/../config/uptimerobot.php', 'uptimerobot'
-        );
+
     }
 
     /**
@@ -36,25 +27,24 @@ class UptimeRobotApiServiceProvider extends ServiceProvider
      */
     public function register()
     {
-       $this->app->bind(UptimeRobotResourceInterface::class,function($app){
-
-            $client = app(UptimeRobotClient::class,['options'=>['base_uri'=>config('uptimerobot.apiUrl')]]);
-            $serializer = new Serializer(
-                    NormalizerFactory::create(),
-                    [
-                        new JsonEncoder(
-                            new JsonEncode(),
-                            new JsonDecode()
-                        ),
-                        new RawEncoder()
-                    ]
-                );
-            $messageFactory = new GuzzleMessageFactory();
-            $api = new UptimeRobotResource($client,$messageFactory,$serializer);
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/uptimerobot.php',
+            'uptimerobot'
+        );
+        $this->app->bind(UptimeRobotResourceInterface::class, function ($app) {
+            $api = $app->make(Client::class);
             $urm = new UptimeRobotManager($api);
             $apiKey = config('uptimerobot.apiKey', '');
             $urm->setApiKey($apiKey);
             return $urm;
+        });
+        $this->app->bind(Client::class,function($app){
+            $httpClient = \Http\Discovery\HttpClientDiscovery::find();
+            $plugins = array();
+            $uri = \Http\Discovery\UriFactoryDiscovery::find()->createUri($app['config']['uptimerobot.apiUrl']);
+            $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
+            $httpClient = new \Http\Client\Common\PluginClient($httpClient, $plugins);
+            return Client::create($httpClient);
         });
     }
 }
