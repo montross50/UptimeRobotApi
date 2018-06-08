@@ -2,7 +2,6 @@
 
 namespace Montross50\UptimeRobotApi;
 
-
 interface UptimeRobotResourceInterface
 {
     /**

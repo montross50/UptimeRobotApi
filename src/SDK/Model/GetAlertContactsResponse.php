@@ -5,49 +5,49 @@ namespace Montross50\UptimeRobotApi\SDK\Model;
 class GetAlertContactsResponse
 {
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $stat;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $offset;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $limit;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $total;
     /**
-     * 
+     *
      *
      * @var AlertContactArray
      */
     protected $alertcontacts;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $id;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $message;
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -56,7 +56,7 @@ class GetAlertContactsResponse
         return $this->stat;
     }
     /**
-     * 
+     *
      *
      * @param string $stat
      *
@@ -68,7 +68,7 @@ class GetAlertContactsResponse
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -77,7 +77,7 @@ class GetAlertContactsResponse
         return $this->offset;
     }
     /**
-     * 
+     *
      *
      * @param string $offset
      *
@@ -89,7 +89,7 @@ class GetAlertContactsResponse
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -98,7 +98,7 @@ class GetAlertContactsResponse
         return $this->limit;
     }
     /**
-     * 
+     *
      *
      * @param string $limit
      *
@@ -110,7 +110,7 @@ class GetAlertContactsResponse
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -119,7 +119,7 @@ class GetAlertContactsResponse
         return $this->total;
     }
     /**
-     * 
+     *
      *
      * @param string $total
      *
@@ -131,7 +131,7 @@ class GetAlertContactsResponse
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return AlertContactArray
      */
@@ -140,7 +140,7 @@ class GetAlertContactsResponse
         return $this->alertcontacts;
     }
     /**
-     * 
+     *
      *
      * @param AlertContactArray $alertcontacts
      *
@@ -152,7 +152,7 @@ class GetAlertContactsResponse
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -161,7 +161,7 @@ class GetAlertContactsResponse
         return $this->id;
     }
     /**
-     * 
+     *
      *
      * @param string $id
      *
@@ -173,7 +173,7 @@ class GetAlertContactsResponse
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -182,7 +182,7 @@ class GetAlertContactsResponse
         return $this->message;
     }
     /**
-     * 
+     *
      *
      * @param string $message
      *

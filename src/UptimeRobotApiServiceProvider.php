@@ -17,7 +17,6 @@ class UptimeRobotApiServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/uptimerobot.php' => config_path('uptimerobot.php'),
         ]);
-
     }
 
     /**
@@ -38,7 +37,7 @@ class UptimeRobotApiServiceProvider extends ServiceProvider
             $urm->setApiKey($apiKey);
             return $urm;
         });
-        $this->app->bind(Client::class,function($app){
+        $this->app->bind(Client::class, function ($app) {
             $httpClient = \Http\Discovery\HttpClientDiscovery::find();
             $plugins = array();
             $uri = \Http\Discovery\UriFactoryDiscovery::find()->createUri($app['config']['uptimerobot.apiUrl']);

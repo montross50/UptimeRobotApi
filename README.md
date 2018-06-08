@@ -15,16 +15,24 @@ Via Composer
 $ composer require montross50/uptime-robot-api
 ```
 
-Add service provider to app/config.php
+This version (2.\*) supports Laravel 5.6 only (maybe 5.5). If you need <= 5.4 checkout out the 1.2.* version.
 
-``` php
- \Montross50\UptimeRobotApi\UptimeRobotApiServiceProvider::class
-```
+## Config
 
+Publish the config file
+~~~
+php artisan vendor:publish --provider="Montross50\UptimeRobotApi\UptimeRobotApiServiceProvider" --tag=config
+~~~
+
+OR use the env
+~~~
+UPTIMEROBOT_API_KEY // default: null
+UPTIMEROBOT_API_URL // default: https://api.uptimerobot.com
+~~~
 ## Usage
 
 ``` php
-$api = \App::make(UptimeRobotManager::class);
+$api = \App::make(UptimeRobotResourceInterface::class);
 echo $api->getMonitors();
 ```
 

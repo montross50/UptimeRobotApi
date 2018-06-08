@@ -18,8 +18,8 @@ class CreateMonitor extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements 
      *     @var string $monitorPort required for port monitoring
      *     @var string $monitorKeywordType required for keyword monitoring
      *     @var string $monitorKeywordValue required for keyword monitoring
-     *     @var string $monitorHTTPUsername 
-     *     @var string $monitorHTTPPassword 
+     *     @var string $monitorHTTPUsername
+     *     @var string $monitorHTTPPassword
      *     @var string $monitorAlertContacts the alert contacts to be notified when the monitor goes up/down.Multiple alertContactIDs can be sent like monitorAlertContacts=457_0_0-373_5_0-8956_2_3 where alertContactIDs are seperated with - and threshold + recurrence are seperated with _. For ex: monitorAlertContacts=457_5_0 refers to 457 being the alertContactID, 0 being the threshold and 0 being the recurrence. As the threshold and recurrence is only available in the Pro Plan, they are always 0 in the Free Plan)
      *     @var string $monitorInterval in minutes
      * }

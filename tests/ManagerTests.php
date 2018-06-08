@@ -3,7 +3,6 @@ namespace Montross50\UptimeRobotApi;
 
 use Montross50\UptimeRobotApi\SDK\Model\GetMonitorsResponse;
 
-
 class ManagerTests extends TestCase
 {
     
@@ -51,5 +50,4 @@ class ManagerTests extends TestCase
 //        $monitors = $api->getMonitors();
 //        $this->assertInstanceOf(GetMonitorsResponse::class,$monitors);
 //    }
-
 }
