@@ -22,7 +22,7 @@
     "jane-php/open-api": "^4.0",
     "php-http/message": "^1.4",
     "php-http/message-factory": "^1.0.2",
-    "illuminate/support": "5.7.*",
+    "illuminate/support": "5.8.*",
     "php-http/discovery": "^1.4",
     "php-http/client-implementation": "^1.0"
   },
