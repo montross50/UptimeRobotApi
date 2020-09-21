@@ -27,7 +27,7 @@ class Log
      *
      * @return string
      */
-    public function getType() : ?string
+    public function getType() : string
     {
         return $this->type;
     }
@@ -38,7 +38,7 @@ class Log
      *
      * @return self
      */
-    public function setType(?string $type) : self
+    public function setType(string $type) : self
     {
         $this->type = $type;
         return $this;
@@ -48,7 +48,7 @@ class Log
      *
      * @return string
      */
-    public function getDatetime() : ?string
+    public function getDatetime() : string
     {
         return $this->datetime;
     }
@@ -59,7 +59,7 @@ class Log
      *
      * @return self
      */
-    public function setDatetime(?string $datetime) : self
+    public function setDatetime(string $datetime) : self
     {
         $this->datetime = $datetime;
         return $this;
@@ -69,7 +69,7 @@ class Log
      *
      * @return AlertContact[]
      */
-    public function getAlertcontact() : ?array
+    public function getAlertcontact() : array
     {
         return $this->alertcontact;
     }
@@ -80,7 +80,7 @@ class Log
      *
      * @return self
      */
-    public function setAlertcontact(?array $alertcontact) : self
+    public function setAlertcontact(array $alertcontact) : self
     {
         $this->alertcontact = $alertcontact;
         return $this;

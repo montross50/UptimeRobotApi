@@ -2,7 +2,7 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Endpoint;
 
-class CreateMonitor extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7HttplugEndpoint
+class CreateMonitor extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\BaseEndpoint implements \Montross50\UptimeRobotApi\SDK\Runtime\Client\Endpoint
 {
     /**
      * New monitors of any type can be created using this method.
@@ -24,24 +24,24 @@ class CreateMonitor extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements 
      *     @var string $monitorInterval in minutes
      * }
      */
-    function __construct(array $queryParameters = array())
+    public function __construct(array $queryParameters = array())
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7HttplugEndpointTrait;
-    function getMethod() : string
+    use \Montross50\UptimeRobotApi\SDK\Runtime\Client\EndpointTrait;
+    public function getMethod() : string
     {
         return 'GET';
     }
-    function getUri() : string
+    public function getUri() : string
     {
         return '/newMonitor';
     }
-    function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, \Http\Message\StreamFactory $streamFactory = null) : array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
         return array(array(), null);
     }
-    function getExtraHeaders() : array
+    public function getExtraHeaders() : array
     {
         return array('Accept' => array('application/json'));
     }
@@ -75,7 +75,7 @@ class CreateMonitor extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements 
      *
      * @return null|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
         if (200 === $status) {
             return $serializer->deserialize($body, 'Montross50\\UptimeRobotApi\\SDK\\Model\\MonitorResponse', 'json');
@@ -86,5 +86,9 @@ class CreateMonitor extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements 
         if (500 === $status) {
             throw new \Montross50\UptimeRobotApi\SDK\Exception\CreateMonitorInternalServerErrorException();
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array();
     }
 }

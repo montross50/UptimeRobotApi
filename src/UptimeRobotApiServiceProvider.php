@@ -31,19 +31,11 @@ class UptimeRobotApiServiceProvider extends ServiceProvider
             'uptimerobot'
         );
         $this->app->bind(UptimeRobotResourceInterface::class, function ($app) {
-            $api = $app->make(Client::class);
+            $api = Client::create();
             $urm = new UptimeRobotManager($api);
             $apiKey = config('uptimerobot.apiKey', '');
             $urm->setApiKey($apiKey);
             return $urm;
-        });
-        $this->app->bind(Client::class, function ($app) {
-            $httpClient = \Http\Discovery\HttpClientDiscovery::find();
-            $plugins = array();
-            $uri = \Http\Discovery\UriFactoryDiscovery::find()->createUri($app['config']['uptimerobot.apiUrl']);
-            $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
-            $httpClient = new \Http\Client\Common\PluginClient($httpClient, $plugins);
-            return Client::create($httpClient);
         });
     }
 }

@@ -9,7 +9,7 @@ class ManagerTests extends TestCase
     public function testApiKeyInsertion()
     {
         $key = 'foo';
-        \Config::set('uptimerobot.apiKey', $key);
+        config(['uptimerobot.apiKey' => $key]);
         /**
          * @var $api UptimeRobotManager
          */
@@ -20,7 +20,7 @@ class ManagerTests extends TestCase
     public function testMergeApiKeyAddsKey()
     {
         $key = 'foo';
-        \Config::set('uptimerobot.apiKey', $key);
+        config(['uptimerobot.apiKey' => $key]);
         /**
          * @var $api UptimeRobotManager
          */
@@ -33,7 +33,7 @@ class ManagerTests extends TestCase
     public function testMergeApiKeyDoesNotOverridePassedInKey()
     {
         $key = 'foo';
-        \Config::set('uptimerobot.apiKey', $key);
+        config(['uptimerobot.apiKey' => $key]);
         /**
          * @var $api UptimeRobotManager
          */

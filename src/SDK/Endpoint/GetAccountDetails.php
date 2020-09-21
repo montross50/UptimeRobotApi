@@ -2,7 +2,7 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Endpoint;
 
-class GetAccountDetails extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7HttplugEndpoint
+class GetAccountDetails extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\BaseEndpoint implements \Montross50\UptimeRobotApi\SDK\Runtime\Client\Endpoint
 {
     /**
      * Account details (max number of monitors that can be added and number of up/down/paused monitors) can be grabbed using this method.
@@ -13,24 +13,24 @@ class GetAccountDetails extends \Jane\OpenApiRuntime\Client\BaseEndpoint impleme
      *     @var string $noJsonCallback Return raw json
      * }
      */
-    function __construct(array $queryParameters = array())
+    public function __construct(array $queryParameters = array())
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7HttplugEndpointTrait;
-    function getMethod() : string
+    use \Montross50\UptimeRobotApi\SDK\Runtime\Client\EndpointTrait;
+    public function getMethod() : string
     {
         return 'GET';
     }
-    function getUri() : string
+    public function getUri() : string
     {
         return '/getAccountDetails';
     }
-    function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, \Http\Message\StreamFactory $streamFactory = null) : array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
         return array(array(), null);
     }
-    function getExtraHeaders() : array
+    public function getExtraHeaders() : array
     {
         return array('Accept' => array('application/json'));
     }
@@ -53,7 +53,7 @@ class GetAccountDetails extends \Jane\OpenApiRuntime\Client\BaseEndpoint impleme
      *
      * @return null|\Montross50\UptimeRobotApi\SDK\Model\AccountDetails
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
         if (200 === $status) {
             return $serializer->deserialize($body, 'Montross50\\UptimeRobotApi\\SDK\\Model\\AccountDetails', 'json');
@@ -64,5 +64,9 @@ class GetAccountDetails extends \Jane\OpenApiRuntime\Client\BaseEndpoint impleme
         if (500 === $status) {
             throw new \Montross50\UptimeRobotApi\SDK\Exception\GetAccountDetailsInternalServerErrorException();
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array();
     }
 }

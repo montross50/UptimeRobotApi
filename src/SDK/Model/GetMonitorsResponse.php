@@ -51,7 +51,7 @@ class GetMonitorsResponse
      *
      * @return string
      */
-    public function getStat() : ?string
+    public function getStat() : string
     {
         return $this->stat;
     }
@@ -62,7 +62,7 @@ class GetMonitorsResponse
      *
      * @return self
      */
-    public function setStat(?string $stat) : self
+    public function setStat(string $stat) : self
     {
         $this->stat = $stat;
         return $this;
@@ -72,7 +72,7 @@ class GetMonitorsResponse
      *
      * @return string
      */
-    public function getOffset() : ?string
+    public function getOffset() : string
     {
         return $this->offset;
     }
@@ -83,7 +83,7 @@ class GetMonitorsResponse
      *
      * @return self
      */
-    public function setOffset(?string $offset) : self
+    public function setOffset(string $offset) : self
     {
         $this->offset = $offset;
         return $this;
@@ -93,7 +93,7 @@ class GetMonitorsResponse
      *
      * @return string
      */
-    public function getLimit() : ?string
+    public function getLimit() : string
     {
         return $this->limit;
     }
@@ -104,7 +104,7 @@ class GetMonitorsResponse
      *
      * @return self
      */
-    public function setLimit(?string $limit) : self
+    public function setLimit(string $limit) : self
     {
         $this->limit = $limit;
         return $this;
@@ -114,7 +114,7 @@ class GetMonitorsResponse
      *
      * @return string
      */
-    public function getTotal() : ?string
+    public function getTotal() : string
     {
         return $this->total;
     }
@@ -125,7 +125,7 @@ class GetMonitorsResponse
      *
      * @return self
      */
-    public function setTotal(?string $total) : self
+    public function setTotal(string $total) : self
     {
         $this->total = $total;
         return $this;
@@ -135,7 +135,7 @@ class GetMonitorsResponse
      *
      * @return MonitorArray
      */
-    public function getMonitors() : ?MonitorArray
+    public function getMonitors() : MonitorArray
     {
         return $this->monitors;
     }
@@ -146,7 +146,7 @@ class GetMonitorsResponse
      *
      * @return self
      */
-    public function setMonitors(?MonitorArray $monitors) : self
+    public function setMonitors(MonitorArray $monitors) : self
     {
         $this->monitors = $monitors;
         return $this;
@@ -156,7 +156,7 @@ class GetMonitorsResponse
      *
      * @return string
      */
-    public function getId() : ?string
+    public function getId() : string
     {
         return $this->id;
     }
@@ -167,7 +167,7 @@ class GetMonitorsResponse
      *
      * @return self
      */
-    public function setId(?string $id) : self
+    public function setId(string $id) : self
     {
         $this->id = $id;
         return $this;
@@ -177,7 +177,7 @@ class GetMonitorsResponse
      *
      * @return string
      */
-    public function getMessage() : ?string
+    public function getMessage() : string
     {
         return $this->message;
     }
@@ -188,7 +188,7 @@ class GetMonitorsResponse
      *
      * @return self
      */
-    public function setMessage(?string $message) : self
+    public function setMessage(string $message) : self
     {
         $this->message = $message;
         return $this;

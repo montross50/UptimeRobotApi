@@ -3,6 +3,7 @@
 namespace Montross50\UptimeRobotApi\SDK\Normalizer;
 
 use Jane\JsonSchemaRuntime\Reference;
+use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\CheckArray;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -15,48 +16,55 @@ class MonitorResponseNormalizer implements DenormalizerInterface, NormalizerInte
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
+    use CheckArray;
     public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Montross50\\UptimeRobotApi\\SDK\\Model\\MonitorResponse';
     }
     public function supportsNormalization($data, $format = null)
     {
-        return $data instanceof \Montross50\UptimeRobotApi\SDK\Model\MonitorResponse;
+        return is_object($data) && get_class($data) === 'Montross50\\UptimeRobotApi\\SDK\\Model\\MonitorResponse';
     }
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException();
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
+        }
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Montross50\UptimeRobotApi\SDK\Model\MonitorResponse();
-        if (property_exists($data, 'stat')) {
-            $object->setStat($data->{'stat'});
+        if (null === $data) {
+            return $object;
         }
-        if (property_exists($data, 'monitor')) {
-            $object->setMonitor($this->denormalizer->denormalize($data->{'monitor'}, 'Montross50\\UptimeRobotApi\\SDK\\Model\\Monitor', 'json', $context));
+        if (\array_key_exists('stat', $data)) {
+            $object->setStat($data['stat']);
         }
-        if (property_exists($data, 'id')) {
-            $object->setId($data->{'id'});
+        if (\array_key_exists('monitor', $data)) {
+            $object->setMonitor($this->denormalizer->denormalize($data['monitor'], 'Montross50\\UptimeRobotApi\\SDK\\Model\\Monitor', 'json', $context));
         }
-        if (property_exists($data, 'message')) {
-            $object->setMessage($data->{'message'});
+        if (\array_key_exists('id', $data)) {
+            $object->setId($data['id']);
+        }
+        if (\array_key_exists('message', $data)) {
+            $object->setMessage($data['message']);
         }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
+        $data = array();
         if (null !== $object->getStat()) {
-            $data->{'stat'} = $object->getStat();
+            $data['stat'] = $object->getStat();
         }
         if (null !== $object->getMonitor()) {
-            $data->{'monitor'} = $this->normalizer->normalize($object->getMonitor(), 'json', $context);
+            $data['monitor'] = $this->normalizer->normalize($object->getMonitor(), 'json', $context);
         }
         if (null !== $object->getId()) {
-            $data->{'id'} = $object->getId();
+            $data['id'] = $object->getId();
         }
         if (null !== $object->getMessage()) {
-            $data->{'message'} = $object->getMessage();
+            $data['message'] = $object->getMessage();
         }
         return $data;
     }

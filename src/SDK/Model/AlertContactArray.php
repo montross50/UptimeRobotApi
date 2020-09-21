@@ -15,7 +15,7 @@ class AlertContactArray
      *
      * @return AlertContact[]
      */
-    public function getAlertcontact() : ?array
+    public function getAlertcontact() : array
     {
         return $this->alertcontact;
     }
@@ -26,7 +26,7 @@ class AlertContactArray
      *
      * @return self
      */
-    public function setAlertcontact(?array $alertcontact) : self
+    public function setAlertcontact(array $alertcontact) : self
     {
         $this->alertcontact = $alertcontact;
         return $this;

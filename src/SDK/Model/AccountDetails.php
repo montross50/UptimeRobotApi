@@ -21,7 +21,7 @@ class AccountDetails
      *
      * @return string
      */
-    public function getStat() : ?string
+    public function getStat() : string
     {
         return $this->stat;
     }
@@ -32,7 +32,7 @@ class AccountDetails
      *
      * @return self
      */
-    public function setStat(?string $stat) : self
+    public function setStat(string $stat) : self
     {
         $this->stat = $stat;
         return $this;
@@ -42,7 +42,7 @@ class AccountDetails
      *
      * @return Account
      */
-    public function getAccount() : ?Account
+    public function getAccount() : Account
     {
         return $this->account;
     }
@@ -53,7 +53,7 @@ class AccountDetails
      *
      * @return self
      */
-    public function setAccount(?Account $account) : self
+    public function setAccount(Account $account) : self
     {
         $this->account = $account;
         return $this;

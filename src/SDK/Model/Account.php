@@ -39,7 +39,7 @@ class Account
      *
      * @return string
      */
-    public function getMonitorLimit() : ?string
+    public function getMonitorLimit() : string
     {
         return $this->monitorLimit;
     }
@@ -50,7 +50,7 @@ class Account
      *
      * @return self
      */
-    public function setMonitorLimit(?string $monitorLimit) : self
+    public function setMonitorLimit(string $monitorLimit) : self
     {
         $this->monitorLimit = $monitorLimit;
         return $this;
@@ -60,7 +60,7 @@ class Account
      *
      * @return string
      */
-    public function getMonitorInterval() : ?string
+    public function getMonitorInterval() : string
     {
         return $this->monitorInterval;
     }
@@ -71,7 +71,7 @@ class Account
      *
      * @return self
      */
-    public function setMonitorInterval(?string $monitorInterval) : self
+    public function setMonitorInterval(string $monitorInterval) : self
     {
         $this->monitorInterval = $monitorInterval;
         return $this;
@@ -81,7 +81,7 @@ class Account
      *
      * @return string
      */
-    public function getUpMonitors() : ?string
+    public function getUpMonitors() : string
     {
         return $this->upMonitors;
     }
@@ -92,7 +92,7 @@ class Account
      *
      * @return self
      */
-    public function setUpMonitors(?string $upMonitors) : self
+    public function setUpMonitors(string $upMonitors) : self
     {
         $this->upMonitors = $upMonitors;
         return $this;
@@ -102,7 +102,7 @@ class Account
      *
      * @return string
      */
-    public function getDownMonitors() : ?string
+    public function getDownMonitors() : string
     {
         return $this->downMonitors;
     }
@@ -113,7 +113,7 @@ class Account
      *
      * @return self
      */
-    public function setDownMonitors(?string $downMonitors) : self
+    public function setDownMonitors(string $downMonitors) : self
     {
         $this->downMonitors = $downMonitors;
         return $this;
@@ -123,7 +123,7 @@ class Account
      *
      * @return string
      */
-    public function getPausedMonitors() : ?string
+    public function getPausedMonitors() : string
     {
         return $this->pausedMonitors;
     }
@@ -134,7 +134,7 @@ class Account
      *
      * @return self
      */
-    public function setPausedMonitors(?string $pausedMonitors) : self
+    public function setPausedMonitors(string $pausedMonitors) : self
     {
         $this->pausedMonitors = $pausedMonitors;
         return $this;

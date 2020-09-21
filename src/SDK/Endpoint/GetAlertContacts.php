@@ -2,7 +2,7 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Endpoint;
 
-class GetAlertContacts extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7HttplugEndpoint
+class GetAlertContacts extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\BaseEndpoint implements \Montross50\UptimeRobotApi\SDK\Runtime\Client\Endpoint
 {
     /**
      * The list of alert contacts can be called with this method.
@@ -16,24 +16,24 @@ class GetAlertContacts extends \Jane\OpenApiRuntime\Client\BaseEndpoint implemen
      *     @var string $limit used for pagination. Defines the max number of records to return for the response. Default and max. is 50
      * }
      */
-    function __construct(array $queryParameters = array())
+    public function __construct(array $queryParameters = array())
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7HttplugEndpointTrait;
-    function getMethod() : string
+    use \Montross50\UptimeRobotApi\SDK\Runtime\Client\EndpointTrait;
+    public function getMethod() : string
     {
         return 'GET';
     }
-    function getUri() : string
+    public function getUri() : string
     {
         return '/getAlertContacts';
     }
-    function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, \Http\Message\StreamFactory $streamFactory = null) : array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
         return array(array(), null);
     }
-    function getExtraHeaders() : array
+    public function getExtraHeaders() : array
     {
         return array('Accept' => array('application/json'));
     }
@@ -59,7 +59,7 @@ class GetAlertContacts extends \Jane\OpenApiRuntime\Client\BaseEndpoint implemen
      *
      * @return null|\Montross50\UptimeRobotApi\SDK\Model\GetAlertContactsResponse
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
         if (200 === $status) {
             return $serializer->deserialize($body, 'Montross50\\UptimeRobotApi\\SDK\\Model\\GetAlertContactsResponse', 'json');
@@ -70,5 +70,9 @@ class GetAlertContacts extends \Jane\OpenApiRuntime\Client\BaseEndpoint implemen
         if (500 === $status) {
             throw new \Montross50\UptimeRobotApi\SDK\Exception\GetAlertContactsInternalServerErrorException();
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array();
     }
 }

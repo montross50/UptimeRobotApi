@@ -21,7 +21,7 @@ class ResponseTime
      *
      * @return string
      */
-    public function getValue() : ?string
+    public function getValue() : string
     {
         return $this->value;
     }
@@ -32,7 +32,7 @@ class ResponseTime
      *
      * @return self
      */
-    public function setValue(?string $value) : self
+    public function setValue(string $value) : self
     {
         $this->value = $value;
         return $this;
@@ -42,7 +42,7 @@ class ResponseTime
      *
      * @return string
      */
-    public function getDatetime() : ?string
+    public function getDatetime() : string
     {
         return $this->datetime;
     }
@@ -53,7 +53,7 @@ class ResponseTime
      *
      * @return self
      */
-    public function setDatetime(?string $datetime) : self
+    public function setDatetime(string $datetime) : self
     {
         $this->datetime = $datetime;
         return $this;

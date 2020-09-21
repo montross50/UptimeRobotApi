@@ -15,7 +15,7 @@ Via Composer
 $ composer require montross50/uptime-robot-api
 ```
 
-This version (2.\*) supports Laravel 5.6 only (maybe 5.5). If you need <= 5.4 checkout out the 1.2.* version.
+This version (6.\*) supports Laravel 6.X only. If you need <= 5.X checkout a previous version.
 
 ## Config
 
@@ -27,7 +27,6 @@ php artisan vendor:publish --provider="Montross50\UptimeRobotApi\UptimeRobotApiS
 OR use the env
 ~~~
 UPTIMEROBOT_API_KEY // default: null
-UPTIMEROBOT_API_URL // default: https://api.uptimerobot.com
 ~~~
 ## Usage
 
