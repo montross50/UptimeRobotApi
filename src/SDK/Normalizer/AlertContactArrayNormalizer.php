@@ -3,6 +3,7 @@
 namespace Montross50\UptimeRobotApi\SDK\Normalizer;
 
 use Jane\JsonSchemaRuntime\Reference;
+use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\CheckArray;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -15,23 +16,30 @@ class AlertContactArrayNormalizer implements DenormalizerInterface, NormalizerIn
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
+    use CheckArray;
     public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContactArray';
     }
     public function supportsNormalization($data, $format = null)
     {
-        return $data instanceof \Montross50\UptimeRobotApi\SDK\Model\AlertContactArray;
+        return is_object($data) && get_class($data) === 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContactArray';
     }
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException();
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
+        }
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Montross50\UptimeRobotApi\SDK\Model\AlertContactArray();
-        if (property_exists($data, 'alertcontact')) {
+        if (null === $data) {
+            return $object;
+        }
+        if (\array_key_exists('alertcontact', $data)) {
             $values = array();
-            foreach ($data->{'alertcontact'} as $value) {
+            foreach ($data['alertcontact'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContact', 'json', $context);
             }
             $object->setAlertcontact($values);
@@ -40,13 +48,13 @@ class AlertContactArrayNormalizer implements DenormalizerInterface, NormalizerIn
     }
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
+        $data = array();
         if (null !== $object->getAlertcontact()) {
             $values = array();
             foreach ($object->getAlertcontact() as $value) {
                 $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $data->{'alertcontact'} = $values;
+            $data['alertcontact'] = $values;
         }
         return $data;
     }

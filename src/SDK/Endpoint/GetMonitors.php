@@ -2,7 +2,7 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Endpoint;
 
-class GetMonitors extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7HttplugEndpoint
+class GetMonitors extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\BaseEndpoint implements \Montross50\UptimeRobotApi\SDK\Runtime\Client\Endpoint
 {
     /**
      * This is a Swiss-Army knife type of a method for getting any information on monitors. By default, it lists all the monitors in a user's account, their friendly names, types (http, keyword, port, etc.), statuses (up, down, etc.) and uptime ratios. There are optional parameters which lets the getMonitors method to output information on any given monitors rather than all of them.
@@ -30,24 +30,24 @@ class GetMonitors extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
      *     @var string $search optional (a keyword of your choice to search within monitorURL and monitorFriendlyName and get filtered results)
      * }
      */
-    function __construct(array $queryParameters = array())
+    public function __construct(array $queryParameters = array())
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7HttplugEndpointTrait;
-    function getMethod() : string
+    use \Montross50\UptimeRobotApi\SDK\Runtime\Client\EndpointTrait;
+    public function getMethod() : string
     {
         return 'GET';
     }
-    function getUri() : string
+    public function getUri() : string
     {
         return '/getMonitors';
     }
-    function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, \Http\Message\StreamFactory $streamFactory = null) : array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
         return array(array(), null);
     }
-    function getExtraHeaders() : array
+    public function getExtraHeaders() : array
     {
         return array('Accept' => array('application/json'));
     }
@@ -87,7 +87,7 @@ class GetMonitors extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
      *
      * @return null|\Montross50\UptimeRobotApi\SDK\Model\GetMonitorsResponse
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
         if (200 === $status) {
             return $serializer->deserialize($body, 'Montross50\\UptimeRobotApi\\SDK\\Model\\GetMonitorsResponse', 'json');
@@ -98,5 +98,9 @@ class GetMonitors extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
         if (500 === $status) {
             throw new \Montross50\UptimeRobotApi\SDK\Exception\GetMonitorsInternalServerErrorException();
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array();
     }
 }

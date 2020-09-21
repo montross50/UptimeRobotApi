@@ -3,6 +3,7 @@
 namespace Montross50\UptimeRobotApi\SDK\Normalizer;
 
 use Jane\JsonSchemaRuntime\Reference;
+use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\CheckArray;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -15,54 +16,61 @@ class AccountNormalizer implements DenormalizerInterface, NormalizerInterface, D
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
+    use CheckArray;
     public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Montross50\\UptimeRobotApi\\SDK\\Model\\Account';
     }
     public function supportsNormalization($data, $format = null)
     {
-        return $data instanceof \Montross50\UptimeRobotApi\SDK\Model\Account;
+        return is_object($data) && get_class($data) === 'Montross50\\UptimeRobotApi\\SDK\\Model\\Account';
     }
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException();
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
+        }
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Montross50\UptimeRobotApi\SDK\Model\Account();
-        if (property_exists($data, 'monitorLimit')) {
-            $object->setMonitorLimit($data->{'monitorLimit'});
+        if (null === $data) {
+            return $object;
         }
-        if (property_exists($data, 'monitorInterval')) {
-            $object->setMonitorInterval($data->{'monitorInterval'});
+        if (\array_key_exists('monitorLimit', $data)) {
+            $object->setMonitorLimit($data['monitorLimit']);
         }
-        if (property_exists($data, 'upMonitors')) {
-            $object->setUpMonitors($data->{'upMonitors'});
+        if (\array_key_exists('monitorInterval', $data)) {
+            $object->setMonitorInterval($data['monitorInterval']);
         }
-        if (property_exists($data, 'downMonitors')) {
-            $object->setDownMonitors($data->{'downMonitors'});
+        if (\array_key_exists('upMonitors', $data)) {
+            $object->setUpMonitors($data['upMonitors']);
         }
-        if (property_exists($data, 'pausedMonitors')) {
-            $object->setPausedMonitors($data->{'pausedMonitors'});
+        if (\array_key_exists('downMonitors', $data)) {
+            $object->setDownMonitors($data['downMonitors']);
+        }
+        if (\array_key_exists('pausedMonitors', $data)) {
+            $object->setPausedMonitors($data['pausedMonitors']);
         }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
+        $data = array();
         if (null !== $object->getMonitorLimit()) {
-            $data->{'monitorLimit'} = $object->getMonitorLimit();
+            $data['monitorLimit'] = $object->getMonitorLimit();
         }
         if (null !== $object->getMonitorInterval()) {
-            $data->{'monitorInterval'} = $object->getMonitorInterval();
+            $data['monitorInterval'] = $object->getMonitorInterval();
         }
         if (null !== $object->getUpMonitors()) {
-            $data->{'upMonitors'} = $object->getUpMonitors();
+            $data['upMonitors'] = $object->getUpMonitors();
         }
         if (null !== $object->getDownMonitors()) {
-            $data->{'downMonitors'} = $object->getDownMonitors();
+            $data['downMonitors'] = $object->getDownMonitors();
         }
         if (null !== $object->getPausedMonitors()) {
-            $data->{'pausedMonitors'} = $object->getPausedMonitors();
+            $data['pausedMonitors'] = $object->getPausedMonitors();
         }
         return $data;
     }

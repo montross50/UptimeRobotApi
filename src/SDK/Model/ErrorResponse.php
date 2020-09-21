@@ -27,7 +27,7 @@ class ErrorResponse
      *
      * @return string
      */
-    public function getStat() : ?string
+    public function getStat() : string
     {
         return $this->stat;
     }
@@ -38,7 +38,7 @@ class ErrorResponse
      *
      * @return self
      */
-    public function setStat(?string $stat) : self
+    public function setStat(string $stat) : self
     {
         $this->stat = $stat;
         return $this;
@@ -48,7 +48,7 @@ class ErrorResponse
      *
      * @return string
      */
-    public function getId() : ?string
+    public function getId() : string
     {
         return $this->id;
     }
@@ -59,7 +59,7 @@ class ErrorResponse
      *
      * @return self
      */
-    public function setId(?string $id) : self
+    public function setId(string $id) : self
     {
         $this->id = $id;
         return $this;
@@ -69,7 +69,7 @@ class ErrorResponse
      *
      * @return string
      */
-    public function getMessage() : ?string
+    public function getMessage() : string
     {
         return $this->message;
     }
@@ -80,7 +80,7 @@ class ErrorResponse
      *
      * @return self
      */
-    public function setMessage(?string $message) : self
+    public function setMessage(string $message) : self
     {
         $this->message = $message;
         return $this;

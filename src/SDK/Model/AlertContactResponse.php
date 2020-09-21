@@ -33,7 +33,7 @@ class AlertContactResponse
      *
      * @return string
      */
-    public function getStat() : ?string
+    public function getStat() : string
     {
         return $this->stat;
     }
@@ -44,7 +44,7 @@ class AlertContactResponse
      *
      * @return self
      */
-    public function setStat(?string $stat) : self
+    public function setStat(string $stat) : self
     {
         $this->stat = $stat;
         return $this;
@@ -54,7 +54,7 @@ class AlertContactResponse
      *
      * @return AlertContact
      */
-    public function getAlertcontact() : ?AlertContact
+    public function getAlertcontact() : AlertContact
     {
         return $this->alertcontact;
     }
@@ -65,7 +65,7 @@ class AlertContactResponse
      *
      * @return self
      */
-    public function setAlertcontact(?AlertContact $alertcontact) : self
+    public function setAlertcontact(AlertContact $alertcontact) : self
     {
         $this->alertcontact = $alertcontact;
         return $this;
@@ -75,7 +75,7 @@ class AlertContactResponse
      *
      * @return string
      */
-    public function getId() : ?string
+    public function getId() : string
     {
         return $this->id;
     }
@@ -86,7 +86,7 @@ class AlertContactResponse
      *
      * @return self
      */
-    public function setId(?string $id) : self
+    public function setId(string $id) : self
     {
         $this->id = $id;
         return $this;
@@ -96,7 +96,7 @@ class AlertContactResponse
      *
      * @return string
      */
-    public function getMessage() : ?string
+    public function getMessage() : string
     {
         return $this->message;
     }
@@ -107,7 +107,7 @@ class AlertContactResponse
      *
      * @return self
      */
-    public function setMessage(?string $message) : self
+    public function setMessage(string $message) : self
     {
         $this->message = $message;
         return $this;

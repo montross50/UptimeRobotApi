@@ -2,7 +2,7 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Endpoint;
 
-class EditMonitor extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7HttplugEndpoint
+class EditMonitor extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\BaseEndpoint implements \Montross50\UptimeRobotApi\SDK\Runtime\Client\Endpoint
 {
     /**
      * Monitors can be edited using this method. Important: The type of a monitor can not be edited (like changing a HTTP monitor into a Port monitor). For such cases, deleting the monitor and re-creating a new one is adviced.
@@ -25,24 +25,24 @@ class EditMonitor extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
      *     @var string $monitorID ID of monitor to edit
      * }
      */
-    function __construct(array $queryParameters = array())
+    public function __construct(array $queryParameters = array())
     {
         $this->queryParameters = $queryParameters;
     }
-    use \Jane\OpenApiRuntime\Client\Psr7HttplugEndpointTrait;
-    function getMethod() : string
+    use \Montross50\UptimeRobotApi\SDK\Runtime\Client\EndpointTrait;
+    public function getMethod() : string
     {
         return 'GET';
     }
-    function getUri() : string
+    public function getUri() : string
     {
         return '/editMonitor';
     }
-    function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, \Http\Message\StreamFactory $streamFactory = null) : array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
     {
         return array(array(), null);
     }
-    function getExtraHeaders() : array
+    public function getExtraHeaders() : array
     {
         return array('Accept' => array('application/json'));
     }
@@ -77,7 +77,7 @@ class EditMonitor extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
      *
      * @return null|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
     {
         if (200 === $status) {
             return $serializer->deserialize($body, 'Montross50\\UptimeRobotApi\\SDK\\Model\\MonitorResponse', 'json');
@@ -88,5 +88,9 @@ class EditMonitor extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
         if (500 === $status) {
             throw new \Montross50\UptimeRobotApi\SDK\Exception\EditMonitorInternalServerErrorException();
         }
+    }
+    public function getAuthenticationScopes() : array
+    {
+        return array();
     }
 }

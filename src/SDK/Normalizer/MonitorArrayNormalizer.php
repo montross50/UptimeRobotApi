@@ -3,6 +3,7 @@
 namespace Montross50\UptimeRobotApi\SDK\Normalizer;
 
 use Jane\JsonSchemaRuntime\Reference;
+use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\CheckArray;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -15,23 +16,30 @@ class MonitorArrayNormalizer implements DenormalizerInterface, NormalizerInterfa
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
+    use CheckArray;
     public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Montross50\\UptimeRobotApi\\SDK\\Model\\MonitorArray';
     }
     public function supportsNormalization($data, $format = null)
     {
-        return $data instanceof \Montross50\UptimeRobotApi\SDK\Model\MonitorArray;
+        return is_object($data) && get_class($data) === 'Montross50\\UptimeRobotApi\\SDK\\Model\\MonitorArray';
     }
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException();
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
+        }
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Montross50\UptimeRobotApi\SDK\Model\MonitorArray();
-        if (property_exists($data, 'monitor')) {
+        if (null === $data) {
+            return $object;
+        }
+        if (\array_key_exists('monitor', $data)) {
             $values = array();
-            foreach ($data->{'monitor'} as $value) {
+            foreach ($data['monitor'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, 'Montross50\\UptimeRobotApi\\SDK\\Model\\Monitor', 'json', $context);
             }
             $object->setMonitor($values);
@@ -40,13 +48,13 @@ class MonitorArrayNormalizer implements DenormalizerInterface, NormalizerInterfa
     }
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
+        $data = array();
         if (null !== $object->getMonitor()) {
             $values = array();
             foreach ($object->getMonitor() as $value) {
                 $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $data->{'monitor'} = $values;
+            $data['monitor'] = $values;
         }
         return $data;
     }

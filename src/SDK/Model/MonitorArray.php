@@ -15,7 +15,7 @@ class MonitorArray
      *
      * @return Monitor[]
      */
-    public function getMonitor() : ?array
+    public function getMonitor() : array
     {
         return $this->monitor;
     }
@@ -26,7 +26,7 @@ class MonitorArray
      *
      * @return self
      */
-    public function setMonitor(?array $monitor) : self
+    public function setMonitor(array $monitor) : self
     {
         $this->monitor = $monitor;
         return $this;

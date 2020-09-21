@@ -3,6 +3,7 @@
 namespace Montross50\UptimeRobotApi\SDK\Normalizer;
 
 use Jane\JsonSchemaRuntime\Reference;
+use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\CheckArray;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -15,79 +16,86 @@ class MonitorNormalizer implements DenormalizerInterface, NormalizerInterface, D
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
+    use CheckArray;
     public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Montross50\\UptimeRobotApi\\SDK\\Model\\Monitor';
     }
     public function supportsNormalization($data, $format = null)
     {
-        return $data instanceof \Montross50\UptimeRobotApi\SDK\Model\Monitor;
+        return is_object($data) && get_class($data) === 'Montross50\\UptimeRobotApi\\SDK\\Model\\Monitor';
     }
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException();
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
+        }
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Montross50\UptimeRobotApi\SDK\Model\Monitor();
-        if (property_exists($data, 'id')) {
-            $object->setId($data->{'id'});
+        if (null === $data) {
+            return $object;
         }
-        if (property_exists($data, 'friendlyname')) {
-            $object->setFriendlyname($data->{'friendlyname'});
+        if (\array_key_exists('id', $data)) {
+            $object->setId($data['id']);
         }
-        if (property_exists($data, 'url')) {
-            $object->setUrl($data->{'url'});
+        if (\array_key_exists('friendlyname', $data)) {
+            $object->setFriendlyname($data['friendlyname']);
         }
-        if (property_exists($data, 'type')) {
-            $object->setType($data->{'type'});
+        if (\array_key_exists('url', $data)) {
+            $object->setUrl($data['url']);
         }
-        if (property_exists($data, 'subtype')) {
-            $object->setSubtype($data->{'subtype'});
+        if (\array_key_exists('type', $data)) {
+            $object->setType($data['type']);
         }
-        if (property_exists($data, 'keywordtype')) {
-            $object->setKeywordtype($data->{'keywordtype'});
+        if (\array_key_exists('subtype', $data)) {
+            $object->setSubtype($data['subtype']);
         }
-        if (property_exists($data, 'keywordvalue')) {
-            $object->setKeywordvalue($data->{'keywordvalue'});
+        if (\array_key_exists('keywordtype', $data)) {
+            $object->setKeywordtype($data['keywordtype']);
         }
-        if (property_exists($data, 'httpusername')) {
-            $object->setHttpusername($data->{'httpusername'});
+        if (\array_key_exists('keywordvalue', $data)) {
+            $object->setKeywordvalue($data['keywordvalue']);
         }
-        if (property_exists($data, 'httppassword')) {
-            $object->setHttppassword($data->{'httppassword'});
+        if (\array_key_exists('httpusername', $data)) {
+            $object->setHttpusername($data['httpusername']);
         }
-        if (property_exists($data, 'port')) {
-            $object->setPort($data->{'port'});
+        if (\array_key_exists('httppassword', $data)) {
+            $object->setHttppassword($data['httppassword']);
         }
-        if (property_exists($data, 'interval')) {
-            $object->setInterval($data->{'interval'});
+        if (\array_key_exists('port', $data)) {
+            $object->setPort($data['port']);
         }
-        if (property_exists($data, 'status')) {
-            $object->setStatus($data->{'status'});
+        if (\array_key_exists('interval', $data)) {
+            $object->setInterval($data['interval']);
         }
-        if (property_exists($data, 'alltimeuptimeratio')) {
-            $object->setAlltimeuptimeratio($data->{'alltimeuptimeratio'});
+        if (\array_key_exists('status', $data)) {
+            $object->setStatus($data['status']);
         }
-        if (property_exists($data, 'customuptimeratio')) {
-            $object->setCustomuptimeratio($data->{'customuptimeratio'});
+        if (\array_key_exists('alltimeuptimeratio', $data)) {
+            $object->setAlltimeuptimeratio($data['alltimeuptimeratio']);
         }
-        if (property_exists($data, 'alertcontact')) {
+        if (\array_key_exists('customuptimeratio', $data)) {
+            $object->setCustomuptimeratio($data['customuptimeratio']);
+        }
+        if (\array_key_exists('alertcontact', $data)) {
             $values = array();
-            foreach ($data->{'alertcontact'} as $value) {
+            foreach ($data['alertcontact'] as $value) {
                 $values[] = $this->denormalizer->denormalize($value, 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContact', 'json', $context);
             }
             $object->setAlertcontact($values);
         }
-        if (property_exists($data, 'log')) {
+        if (\array_key_exists('log', $data)) {
             $values_1 = array();
-            foreach ($data->{'log'} as $value_1) {
+            foreach ($data['log'] as $value_1) {
                 $values_1[] = $this->denormalizer->denormalize($value_1, 'Montross50\\UptimeRobotApi\\SDK\\Model\\Log', 'json', $context);
             }
             $object->setLog($values_1);
         }
-        if (property_exists($data, 'responsetime')) {
+        if (\array_key_exists('responsetime', $data)) {
             $values_2 = array();
-            foreach ($data->{'responsetime'} as $value_2) {
+            foreach ($data['responsetime'] as $value_2) {
                 $values_2[] = $this->denormalizer->denormalize($value_2, 'Montross50\\UptimeRobotApi\\SDK\\Model\\ResponseTime', 'json', $context);
             }
             $object->setResponsetime($values_2);
@@ -96,69 +104,69 @@ class MonitorNormalizer implements DenormalizerInterface, NormalizerInterface, D
     }
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
+        $data = array();
         if (null !== $object->getId()) {
-            $data->{'id'} = $object->getId();
+            $data['id'] = $object->getId();
         }
         if (null !== $object->getFriendlyname()) {
-            $data->{'friendlyname'} = $object->getFriendlyname();
+            $data['friendlyname'] = $object->getFriendlyname();
         }
         if (null !== $object->getUrl()) {
-            $data->{'url'} = $object->getUrl();
+            $data['url'] = $object->getUrl();
         }
         if (null !== $object->getType()) {
-            $data->{'type'} = $object->getType();
+            $data['type'] = $object->getType();
         }
         if (null !== $object->getSubtype()) {
-            $data->{'subtype'} = $object->getSubtype();
+            $data['subtype'] = $object->getSubtype();
         }
         if (null !== $object->getKeywordtype()) {
-            $data->{'keywordtype'} = $object->getKeywordtype();
+            $data['keywordtype'] = $object->getKeywordtype();
         }
         if (null !== $object->getKeywordvalue()) {
-            $data->{'keywordvalue'} = $object->getKeywordvalue();
+            $data['keywordvalue'] = $object->getKeywordvalue();
         }
         if (null !== $object->getHttpusername()) {
-            $data->{'httpusername'} = $object->getHttpusername();
+            $data['httpusername'] = $object->getHttpusername();
         }
         if (null !== $object->getHttppassword()) {
-            $data->{'httppassword'} = $object->getHttppassword();
+            $data['httppassword'] = $object->getHttppassword();
         }
         if (null !== $object->getPort()) {
-            $data->{'port'} = $object->getPort();
+            $data['port'] = $object->getPort();
         }
         if (null !== $object->getInterval()) {
-            $data->{'interval'} = $object->getInterval();
+            $data['interval'] = $object->getInterval();
         }
         if (null !== $object->getStatus()) {
-            $data->{'status'} = $object->getStatus();
+            $data['status'] = $object->getStatus();
         }
         if (null !== $object->getAlltimeuptimeratio()) {
-            $data->{'alltimeuptimeratio'} = $object->getAlltimeuptimeratio();
+            $data['alltimeuptimeratio'] = $object->getAlltimeuptimeratio();
         }
         if (null !== $object->getCustomuptimeratio()) {
-            $data->{'customuptimeratio'} = $object->getCustomuptimeratio();
+            $data['customuptimeratio'] = $object->getCustomuptimeratio();
         }
         if (null !== $object->getAlertcontact()) {
             $values = array();
             foreach ($object->getAlertcontact() as $value) {
                 $values[] = $this->normalizer->normalize($value, 'json', $context);
             }
-            $data->{'alertcontact'} = $values;
+            $data['alertcontact'] = $values;
         }
         if (null !== $object->getLog()) {
             $values_1 = array();
             foreach ($object->getLog() as $value_1) {
                 $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
             }
-            $data->{'log'} = $values_1;
+            $data['log'] = $values_1;
         }
         if (null !== $object->getResponsetime()) {
             $values_2 = array();
             foreach ($object->getResponsetime() as $value_2) {
                 $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
             }
-            $data->{'responsetime'} = $values_2;
+            $data['responsetime'] = $values_2;
         }
         return $data;
     }

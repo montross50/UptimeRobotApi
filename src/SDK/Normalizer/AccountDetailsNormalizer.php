@@ -3,6 +3,7 @@
 namespace Montross50\UptimeRobotApi\SDK\Normalizer;
 
 use Jane\JsonSchemaRuntime\Reference;
+use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\CheckArray;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -15,36 +16,43 @@ class AccountDetailsNormalizer implements DenormalizerInterface, NormalizerInter
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
+    use CheckArray;
     public function supportsDenormalization($data, $type, $format = null)
     {
         return $type === 'Montross50\\UptimeRobotApi\\SDK\\Model\\AccountDetails';
     }
     public function supportsNormalization($data, $format = null)
     {
-        return $data instanceof \Montross50\UptimeRobotApi\SDK\Model\AccountDetails;
+        return is_object($data) && get_class($data) === 'Montross50\\UptimeRobotApi\\SDK\\Model\\AccountDetails';
     }
     public function denormalize($data, $class, $format = null, array $context = array())
     {
-        if (!is_object($data)) {
-            throw new InvalidArgumentException();
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
+        }
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Montross50\UptimeRobotApi\SDK\Model\AccountDetails();
-        if (property_exists($data, 'stat')) {
-            $object->setStat($data->{'stat'});
+        if (null === $data) {
+            return $object;
         }
-        if (property_exists($data, 'account')) {
-            $object->setAccount($this->denormalizer->denormalize($data->{'account'}, 'Montross50\\UptimeRobotApi\\SDK\\Model\\Account', 'json', $context));
+        if (\array_key_exists('stat', $data)) {
+            $object->setStat($data['stat']);
+        }
+        if (\array_key_exists('account', $data)) {
+            $object->setAccount($this->denormalizer->denormalize($data['account'], 'Montross50\\UptimeRobotApi\\SDK\\Model\\Account', 'json', $context));
         }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
     {
-        $data = new \stdClass();
+        $data = array();
         if (null !== $object->getStat()) {
-            $data->{'stat'} = $object->getStat();
+            $data['stat'] = $object->getStat();
         }
         if (null !== $object->getAccount()) {
-            $data->{'account'} = $this->normalizer->normalize($object->getAccount(), 'json', $context);
+            $data['account'] = $this->normalizer->normalize($object->getAccount(), 'json', $context);
         }
         return $data;
     }

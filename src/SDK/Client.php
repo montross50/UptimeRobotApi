@@ -2,9 +2,7 @@
 
 namespace Montross50\UptimeRobotApi\SDK;
 
-use Montross50\UptimeRobotApi\UptimeRobotResourceInterface;
-
-class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient implements UptimeRobotResourceInterface
+class Client extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Client
 {
     /**
      * Account details (max number of monitors that can be added and number of up/down/paused monitors) can be grabbed using this method.
@@ -22,7 +20,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient implements Up
      */
     public function getAccountDetails(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\GetAccountDetails($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\GetAccountDetails($queryParameters), $fetch);
     }
     /**
      * This is a Swiss-Army knife type of a method for getting any information on monitors. By default, it lists all the monitors in a user's account, their friendly names, types (http, keyword, port, etc.), statuses (up, down, etc.) and uptime ratios. There are optional parameters which lets the getMonitors method to output information on any given monitors rather than all of them.
@@ -57,7 +55,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient implements Up
      */
     public function getMonitors(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\GetMonitors($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\GetMonitors($queryParameters), $fetch);
     }
     /**
      * New monitors of any type can be created using this method.
@@ -86,7 +84,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient implements Up
      */
     public function createMonitor(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\CreateMonitor($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\CreateMonitor($queryParameters), $fetch);
     }
     /**
      * Monitors can be deleted using this method.
@@ -105,7 +103,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient implements Up
      */
     public function deleteMonitor(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\DeleteMonitor($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\DeleteMonitor($queryParameters), $fetch);
     }
     /**
      * Monitors can be reset (deleting all stats and response time data) using this method.
@@ -124,7 +122,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient implements Up
      */
     public function resetMonitor(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\ResetMonitor($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\ResetMonitor($queryParameters), $fetch);
     }
     /**
      * Monitors can be edited using this method. Important: The type of a monitor can not be edited (like changing a HTTP monitor into a Port monitor). For such cases, deleting the monitor and re-creating a new one is adviced.
@@ -154,7 +152,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient implements Up
      */
     public function editMonitor(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\EditMonitor($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\EditMonitor($queryParameters), $fetch);
     }
     /**
      * The list of alert contacts can be called with this method.
@@ -175,7 +173,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient implements Up
      */
     public function getAlertContacts(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\GetAlertContacts($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\GetAlertContacts($queryParameters), $fetch);
     }
     /**
      * New alert contacts of any type (mobile/SMS alert contacts are not supported yet) can be created using this method. The alert contacts created using the API are validated with the same way as they were created from uptimerobot.com (activation link for e-mails, tc.).
@@ -196,7 +194,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient implements Up
      */
     public function newAlertContact(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\NewAlertContact($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\NewAlertContact($queryParameters), $fetch);
     }
     /**
      * Alert contacts can be deleted using this method.
@@ -215,21 +213,24 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient implements Up
      */
     public function deleteAlertContact(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\DeleteAlertContact($queryParameters), $fetch);
+        return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\DeleteAlertContact($queryParameters), $fetch);
     }
-    public static function create($httpClient = null)
+    public static function create($httpClient = null, array $additionalPlugins = array())
     {
         if (null === $httpClient) {
-            $httpClient = \Http\Discovery\HttpClientDiscovery::find();
+            $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = array();
-            $uri = \Http\Discovery\UriFactoryDiscovery::find()->createUri('https://api.uptimerobot.com/test');
-            $plugins[] = new \Http\Client\Common\Plugin\AddPathPlugin($uri);
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.uptimerobot.com/');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
+            $plugins[] = new \Http\Client\Common\Plugin\AddPathPlugin($uri);
+            if (count($additionalPlugins) > 0) {
+                $plugins = array_merge($plugins, $additionalPlugins);
+            }
             $httpClient = new \Http\Client\Common\PluginClient($httpClient, $plugins);
         }
-        $messageFactory = \Http\Discovery\MessageFactoryDiscovery::find();
-        $streamFactory = \Http\Discovery\StreamFactoryDiscovery::find();
-        $serializer = new \Symfony\Component\Serializer\Serializer(\Montross50\UptimeRobotApi\SDK\Normalizer\NormalizerFactory::create(), array(new \Symfony\Component\Serializer\Encoder\JsonEncoder(new \Symfony\Component\Serializer\Encoder\JsonEncode(), new \Symfony\Component\Serializer\Encoder\JsonDecode())));
-        return new static($httpClient, $messageFactory, $serializer, $streamFactory);
+        $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
+        $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
+        $serializer = new \Symfony\Component\Serializer\Serializer(array(new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \Montross50\UptimeRobotApi\SDK\Normalizer\JaneObjectNormalizer()), array(new \Symfony\Component\Serializer\Encoder\JsonEncoder(new \Symfony\Component\Serializer\Encoder\JsonEncode(), new \Symfony\Component\Serializer\Encoder\JsonDecode(array('json_decode_associative' => true)))));
+        return new static($httpClient, $requestFactory, $serializer, $streamFactory);
     }
 }

@@ -45,7 +45,7 @@ class AlertContact
      *
      * @return string
      */
-    public function getId() : ?string
+    public function getId() : string
     {
         return $this->id;
     }
@@ -56,7 +56,7 @@ class AlertContact
      *
      * @return self
      */
-    public function setId(?string $id) : self
+    public function setId(string $id) : self
     {
         $this->id = $id;
         return $this;
@@ -66,7 +66,7 @@ class AlertContact
      *
      * @return string
      */
-    public function getType() : ?string
+    public function getType() : string
     {
         return $this->type;
     }
@@ -77,7 +77,7 @@ class AlertContact
      *
      * @return self
      */
-    public function setType(?string $type) : self
+    public function setType(string $type) : self
     {
         $this->type = $type;
         return $this;
@@ -87,7 +87,7 @@ class AlertContact
      *
      * @return string
      */
-    public function getValue() : ?string
+    public function getValue() : string
     {
         return $this->value;
     }
@@ -98,7 +98,7 @@ class AlertContact
      *
      * @return self
      */
-    public function setValue(?string $value) : self
+    public function setValue(string $value) : self
     {
         $this->value = $value;
         return $this;
@@ -108,7 +108,7 @@ class AlertContact
      *
      * @return string
      */
-    public function getFriendlyname() : ?string
+    public function getFriendlyname() : string
     {
         return $this->friendlyname;
     }
@@ -119,7 +119,7 @@ class AlertContact
      *
      * @return self
      */
-    public function setFriendlyname(?string $friendlyname) : self
+    public function setFriendlyname(string $friendlyname) : self
     {
         $this->friendlyname = $friendlyname;
         return $this;
@@ -129,7 +129,7 @@ class AlertContact
      *
      * @return string
      */
-    public function getThreshold() : ?string
+    public function getThreshold() : string
     {
         return $this->threshold;
     }
@@ -140,7 +140,7 @@ class AlertContact
      *
      * @return self
      */
-    public function setThreshold(?string $threshold) : self
+    public function setThreshold(string $threshold) : self
     {
         $this->threshold = $threshold;
         return $this;
@@ -150,7 +150,7 @@ class AlertContact
      *
      * @return string
      */
-    public function getRecurrence() : ?string
+    public function getRecurrence() : string
     {
         return $this->recurrence;
     }
@@ -161,7 +161,7 @@ class AlertContact
      *
      * @return self
      */
-    public function setRecurrence(?string $recurrence) : self
+    public function setRecurrence(string $recurrence) : self
     {
         $this->recurrence = $recurrence;
         return $this;
