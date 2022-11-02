@@ -11,9 +11,9 @@ class NewAlertContact extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Base
      *     @var string $apiKey API key
      *     @var string $format Response format
      *     @var string $noJsonCallback Return raw json
-     *     @var string $alertContactType 
-     *     @var string $alertContactValue 
-     *     @var string $alertContactFriendlyName 
+     *     @var string $alertContactType
+     *     @var string $alertContactValue
+     *     @var string $alertContactFriendlyName
      * }
      */
     public function __construct(array $queryParameters = array())

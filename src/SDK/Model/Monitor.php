@@ -5,109 +5,109 @@ namespace Montross50\UptimeRobotApi\SDK\Model;
 class Monitor
 {
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $id;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $friendlyname;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $url;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $type;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $subtype;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $keywordtype;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $keywordvalue;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $httpusername;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $httppassword;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $port;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $interval;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $status;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $alltimeuptimeratio;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $customuptimeratio;
     /**
-     * 
+     *
      *
      * @var AlertContact[]
      */
     protected $alertcontact;
     /**
-     * 
+     *
      *
      * @var Log[]
      */
     protected $log;
     /**
-     * 
+     *
      *
      * @var ResponseTime[]
      */
     protected $responsetime;
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -116,7 +116,7 @@ class Monitor
         return $this->id;
     }
     /**
-     * 
+     *
      *
      * @param string $id
      *
@@ -128,7 +128,7 @@ class Monitor
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -137,7 +137,7 @@ class Monitor
         return $this->friendlyname;
     }
     /**
-     * 
+     *
      *
      * @param string $friendlyname
      *
@@ -149,7 +149,7 @@ class Monitor
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -158,7 +158,7 @@ class Monitor
         return $this->url;
     }
     /**
-     * 
+     *
      *
      * @param string $url
      *
@@ -170,7 +170,7 @@ class Monitor
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -179,7 +179,7 @@ class Monitor
         return $this->type;
     }
     /**
-     * 
+     *
      *
      * @param string $type
      *
@@ -191,7 +191,7 @@ class Monitor
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -200,7 +200,7 @@ class Monitor
         return $this->subtype;
     }
     /**
-     * 
+     *
      *
      * @param string $subtype
      *
@@ -212,7 +212,7 @@ class Monitor
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -221,7 +221,7 @@ class Monitor
         return $this->keywordtype;
     }
     /**
-     * 
+     *
      *
      * @param string $keywordtype
      *
@@ -233,7 +233,7 @@ class Monitor
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -242,7 +242,7 @@ class Monitor
         return $this->keywordvalue;
     }
     /**
-     * 
+     *
      *
      * @param string $keywordvalue
      *
@@ -254,7 +254,7 @@ class Monitor
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -263,7 +263,7 @@ class Monitor
         return $this->httpusername;
     }
     /**
-     * 
+     *
      *
      * @param string $httpusername
      *
@@ -275,7 +275,7 @@ class Monitor
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -284,7 +284,7 @@ class Monitor
         return $this->httppassword;
     }
     /**
-     * 
+     *
      *
      * @param string $httppassword
      *
@@ -296,7 +296,7 @@ class Monitor
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -305,7 +305,7 @@ class Monitor
         return $this->port;
     }
     /**
-     * 
+     *
      *
      * @param string $port
      *
@@ -317,7 +317,7 @@ class Monitor
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -326,7 +326,7 @@ class Monitor
         return $this->interval;
     }
     /**
-     * 
+     *
      *
      * @param string $interval
      *
@@ -338,7 +338,7 @@ class Monitor
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -347,7 +347,7 @@ class Monitor
         return $this->status;
     }
     /**
-     * 
+     *
      *
      * @param string $status
      *
@@ -359,7 +359,7 @@ class Monitor
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -368,7 +368,7 @@ class Monitor
         return $this->alltimeuptimeratio;
     }
     /**
-     * 
+     *
      *
      * @param string $alltimeuptimeratio
      *
@@ -380,7 +380,7 @@ class Monitor
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -389,7 +389,7 @@ class Monitor
         return $this->customuptimeratio;
     }
     /**
-     * 
+     *
      *
      * @param string $customuptimeratio
      *
@@ -401,7 +401,7 @@ class Monitor
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return AlertContact[]
      */
@@ -410,7 +410,7 @@ class Monitor
         return $this->alertcontact;
     }
     /**
-     * 
+     *
      *
      * @param AlertContact[] $alertcontact
      *
@@ -422,7 +422,7 @@ class Monitor
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return Log[]
      */
@@ -431,7 +431,7 @@ class Monitor
         return $this->log;
     }
     /**
-     * 
+     *
      *
      * @param Log[] $log
      *
@@ -443,7 +443,7 @@ class Monitor
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return ResponseTime[]
      */
@@ -452,7 +452,7 @@ class Monitor
         return $this->responsetime;
     }
     /**
-     * 
+     *
      *
      * @param ResponseTime[] $responsetime
      *

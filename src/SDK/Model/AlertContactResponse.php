@@ -5,31 +5,31 @@ namespace Montross50\UptimeRobotApi\SDK\Model;
 class AlertContactResponse
 {
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $stat;
     /**
-     * 
+     *
      *
      * @var AlertContact
      */
     protected $alertcontact;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $id;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $message;
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -38,7 +38,7 @@ class AlertContactResponse
         return $this->stat;
     }
     /**
-     * 
+     *
      *
      * @param string $stat
      *
@@ -50,7 +50,7 @@ class AlertContactResponse
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return AlertContact
      */
@@ -59,7 +59,7 @@ class AlertContactResponse
         return $this->alertcontact;
     }
     /**
-     * 
+     *
      *
      * @param AlertContact $alertcontact
      *
@@ -71,7 +71,7 @@ class AlertContactResponse
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -80,7 +80,7 @@ class AlertContactResponse
         return $this->id;
     }
     /**
-     * 
+     *
      *
      * @param string $id
      *
@@ -92,7 +92,7 @@ class AlertContactResponse
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -101,7 +101,7 @@ class AlertContactResponse
         return $this->message;
     }
     /**
-     * 
+     *
      *
      * @param string $message
      *

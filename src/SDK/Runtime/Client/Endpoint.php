@@ -4,6 +4,7 @@ namespace Montross50\UptimeRobotApi\SDK\Runtime\Client;
 
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+
 interface Endpoint
 {
     /**

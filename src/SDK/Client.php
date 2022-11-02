@@ -36,7 +36,7 @@ class Client extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Client
      *     @var string $logs ptional (defines if the logs of each monitor will be returned. Should be set to 1 for getting the logs. Default is 0)
      *     @var string $logsLimit optional (the number of logs to be returned (descending order). If empty, all logs are returned.
      *     @var string $responseTimes optional (defines if the response time data of each monitor will be returned. Should be set to 1 for getting them. Default is 0)
-     *     @var string $responseTimesLimit 
+     *     @var string $responseTimesLimit
      *     @var string $responseTimesAverage optional (by default, response time value of each check is returned. The API can return average values in given minutes. Default is 0. For ex: the Uptime Robot dashboard displays the data averaged/grouped in 30 minutes)
      *     @var string $responseTimesStartDate optional (the number of response time logs to be returned (descending order). If empty, last 24 hours of logs are returned (if responseTimesStartDate and responseTimesEndDate are not used).
      *     @var string $responseTimesEndDate optional and works only for the Pro Plan as 24 hour+ logs are kept only in the Pro Plan (ending date of the response times, formatted as 2015-04-23 and must be used with responseTimesStartDate) (can only be used if monitors parameter is used with a single monitorID and responseTimesEndDate - responseTimesStartDate can't be more than 7 days)
@@ -71,8 +71,8 @@ class Client extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Client
      *     @var string $monitorPort required for port monitoring
      *     @var string $monitorKeywordType required for keyword monitoring
      *     @var string $monitorKeywordValue required for keyword monitoring
-     *     @var string $monitorHTTPUsername 
-     *     @var string $monitorHTTPPassword 
+     *     @var string $monitorHTTPUsername
+     *     @var string $monitorHTTPPassword
      *     @var string $monitorAlertContacts the alert contacts to be notified when the monitor goes up/down.Multiple alertContactIDs can be sent like monitorAlertContacts=457_0_0-373_5_0-8956_2_3 where alertContactIDs are seperated with - and threshold + recurrence are seperated with _. For ex: monitorAlertContacts=457_5_0 refers to 457 being the alertContactID, 0 being the threshold and 0 being the recurrence. As the threshold and recurrence is only available in the Pro Plan, they are always 0 in the Free Plan)
      *     @var string $monitorInterval in minutes
      * }
@@ -182,9 +182,9 @@ class Client extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Client
      *     @var string $apiKey API key
      *     @var string $format Response format
      *     @var string $noJsonCallback Return raw json
-     *     @var string $alertContactType 
-     *     @var string $alertContactValue 
-     *     @var string $alertContactFriendlyName 
+     *     @var string $alertContactType
+     *     @var string $alertContactValue
+     *     @var string $alertContactFriendlyName
      * }
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\NewAlertContactBadRequestException

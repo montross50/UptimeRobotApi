@@ -5,37 +5,37 @@ namespace Montross50\UptimeRobotApi\SDK\Model;
 class Account
 {
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $monitorLimit;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $monitorInterval;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $upMonitors;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $downMonitors;
     /**
-     * 
+     *
      *
      * @var string
      */
     protected $pausedMonitors;
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -44,7 +44,7 @@ class Account
         return $this->monitorLimit;
     }
     /**
-     * 
+     *
      *
      * @param string $monitorLimit
      *
@@ -56,7 +56,7 @@ class Account
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -65,7 +65,7 @@ class Account
         return $this->monitorInterval;
     }
     /**
-     * 
+     *
      *
      * @param string $monitorInterval
      *
@@ -77,7 +77,7 @@ class Account
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -86,7 +86,7 @@ class Account
         return $this->upMonitors;
     }
     /**
-     * 
+     *
      *
      * @param string $upMonitors
      *
@@ -98,7 +98,7 @@ class Account
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -107,7 +107,7 @@ class Account
         return $this->downMonitors;
     }
     /**
-     * 
+     *
      *
      * @param string $downMonitors
      *
@@ -119,7 +119,7 @@ class Account
         return $this;
     }
     /**
-     * 
+     *
      *
      * @return string
      */
@@ -128,7 +128,7 @@ class Account
         return $this->pausedMonitors;
     }
     /**
-     * 
+     *
      *
      * @param string $pausedMonitors
      *
