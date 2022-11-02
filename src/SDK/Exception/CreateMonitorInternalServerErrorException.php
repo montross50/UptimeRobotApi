@@ -2,10 +2,10 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Exception;
 
-class CreateMonitorInternalServerErrorException extends \RuntimeException implements ServerException
+class CreateMonitorInternalServerErrorException extends InternalServerErrorException
 {
     public function __construct()
     {
-        parent::__construct('server error', 500);
+        parent::__construct('server error');
     }
 }

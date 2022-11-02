@@ -53,7 +53,7 @@ class GetAccountDetails extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Ba
      *
      * @return null|\Montross50\UptimeRobotApi\SDK\Model\AccountDetails
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $status) {
             return $serializer->deserialize($body, 'Montross50\\UptimeRobotApi\\SDK\\Model\\AccountDetails', 'json');

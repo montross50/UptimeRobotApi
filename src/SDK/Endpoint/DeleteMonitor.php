@@ -55,7 +55,7 @@ class DeleteMonitor extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\BaseEn
      *
      * @return null|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $status) {
             return $serializer->deserialize($body, 'Montross50\\UptimeRobotApi\\SDK\\Model\\MonitorResponse', 'json');

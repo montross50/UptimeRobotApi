@@ -2,10 +2,10 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Exception;
 
-class GetAccountDetailsBadRequestException extends \RuntimeException implements ClientException
+class GetAccountDetailsBadRequestException extends BadRequestException
 {
     public function __construct()
     {
-        parent::__construct('bad parameter', 400);
+        parent::__construct('bad parameter');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\CheckArray;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
@@ -17,14 +17,17 @@ class AlertContactResponseNormalizer implements DenormalizerInterface, Normalize
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization($data, $type, $format = null) : bool
     {
         return $type === 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContactResponse';
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null) : bool
     {
         return is_object($data) && get_class($data) === 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContactResponse';
     }
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
         if (isset($data['$ref'])) {
@@ -34,7 +37,7 @@ class AlertContactResponseNormalizer implements DenormalizerInterface, Normalize
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \Montross50\UptimeRobotApi\SDK\Model\AlertContactResponse();
-        if (null === $data) {
+        if (null === $data || false === \is_array($data)) {
             return $object;
         }
         if (\array_key_exists('stat', $data)) {
@@ -51,6 +54,9 @@ class AlertContactResponseNormalizer implements DenormalizerInterface, Normalize
         }
         return $object;
     }
+    /**
+     * @return array|string|int|float|bool|\ArrayObject|null
+     */
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();

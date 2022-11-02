@@ -2,10 +2,10 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Exception;
 
-class DeleteAlertContactBadRequestException extends \RuntimeException implements ClientException
+class DeleteAlertContactBadRequestException extends BadRequestException
 {
     public function __construct()
     {
-        parent::__construct('bad parameter', 400);
+        parent::__construct('bad parameter');
     }
 }
