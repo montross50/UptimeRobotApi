@@ -5,25 +5,25 @@ namespace Montross50\UptimeRobotApi\SDK\Model;
 class Log
 {
     /**
-     *
+     * 
      *
      * @var string
      */
     protected $type;
     /**
-     *
+     * 
      *
      * @var string
      */
     protected $datetime;
     /**
-     *
+     * 
      *
      * @var AlertContact[]
      */
     protected $alertcontact;
     /**
-     *
+     * 
      *
      * @return string
      */
@@ -32,7 +32,7 @@ class Log
         return $this->type;
     }
     /**
-     *
+     * 
      *
      * @param string $type
      *
@@ -44,7 +44,7 @@ class Log
         return $this;
     }
     /**
-     *
+     * 
      *
      * @return string
      */
@@ -53,7 +53,7 @@ class Log
         return $this->datetime;
     }
     /**
-     *
+     * 
      *
      * @param string $datetime
      *
@@ -65,7 +65,7 @@ class Log
         return $this;
     }
     /**
-     *
+     * 
      *
      * @return AlertContact[]
      */
@@ -74,7 +74,7 @@ class Log
         return $this->alertcontact;
     }
     /**
-     *
+     * 
      *
      * @param AlertContact[] $alertcontact
      *

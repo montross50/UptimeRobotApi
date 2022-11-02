@@ -2,10 +2,10 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Exception;
 
-class NewAlertContactInternalServerErrorException extends \RuntimeException implements ServerException
+class NewAlertContactInternalServerErrorException extends InternalServerErrorException
 {
     public function __construct()
     {
-        parent::__construct('server error', 500);
+        parent::__construct('server error');
     }
 }

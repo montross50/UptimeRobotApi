@@ -5,19 +5,19 @@ namespace Montross50\UptimeRobotApi\SDK\Model;
 class ResponseTime
 {
     /**
-     *
+     * 
      *
      * @var string
      */
     protected $value;
     /**
-     *
+     * 
      *
      * @var string
      */
     protected $datetime;
     /**
-     *
+     * 
      *
      * @return string
      */
@@ -26,7 +26,7 @@ class ResponseTime
         return $this->value;
     }
     /**
-     *
+     * 
      *
      * @param string $value
      *
@@ -38,7 +38,7 @@ class ResponseTime
         return $this;
     }
     /**
-     *
+     * 
      *
      * @return string
      */
@@ -47,7 +47,7 @@ class ResponseTime
         return $this->datetime;
     }
     /**
-     *
+     * 
      *
      * @param string $datetime
      *

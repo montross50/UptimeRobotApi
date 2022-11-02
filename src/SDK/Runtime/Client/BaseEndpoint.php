@@ -5,17 +5,16 @@ namespace Montross50\UptimeRobotApi\SDK\Runtime\Client;
 use Http\Message\MultipartStream\MultipartStreamBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Serializer\SerializerInterface;
-
 abstract class BaseEndpoint implements Endpoint
 {
     protected $queryParameters = [];
     protected $headerParameters = [];
     protected $body;
-    abstract public function getMethod() : string;
-    abstract public function getBody(SerializerInterface $serializer, $streamFactory = null) : array;
-    abstract public function getUri() : string;
-    abstract public function getAuthenticationScopes() : array;
-    abstract protected function transformResponseBody(string $body, int $status, SerializerInterface $serializer, ?string $contentType);
+    public abstract function getMethod() : string;
+    public abstract function getBody(SerializerInterface $serializer, $streamFactory = null) : array;
+    public abstract function getUri() : string;
+    public abstract function getAuthenticationScopes() : array;
+    protected abstract function transformResponseBody(string $body, int $status, SerializerInterface $serializer, ?string $contentType = null);
     protected function getExtraHeaders() : array
     {
         return [];

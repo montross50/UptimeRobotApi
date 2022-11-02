@@ -5,19 +5,19 @@ namespace Montross50\UptimeRobotApi\SDK\Model;
 class AccountDetails
 {
     /**
-     *
+     * 
      *
      * @var string
      */
     protected $stat;
     /**
-     *
+     * 
      *
      * @var Account
      */
     protected $account;
     /**
-     *
+     * 
      *
      * @return string
      */
@@ -26,7 +26,7 @@ class AccountDetails
         return $this->stat;
     }
     /**
-     *
+     * 
      *
      * @param string $stat
      *
@@ -38,7 +38,7 @@ class AccountDetails
         return $this;
     }
     /**
-     *
+     * 
      *
      * @return Account
      */
@@ -47,7 +47,7 @@ class AccountDetails
         return $this->account;
     }
     /**
-     *
+     * 
      *
      * @param Account $account
      *

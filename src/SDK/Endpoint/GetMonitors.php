@@ -18,7 +18,7 @@ class GetMonitors extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\BaseEndp
      *     @var string $logs ptional (defines if the logs of each monitor will be returned. Should be set to 1 for getting the logs. Default is 0)
      *     @var string $logsLimit optional (the number of logs to be returned (descending order). If empty, all logs are returned.
      *     @var string $responseTimes optional (defines if the response time data of each monitor will be returned. Should be set to 1 for getting them. Default is 0)
-     *     @var string $responseTimesLimit
+     *     @var string $responseTimesLimit 
      *     @var string $responseTimesAverage optional (by default, response time value of each check is returned. The API can return average values in given minutes. Default is 0. For ex: the Uptime Robot dashboard displays the data averaged/grouped in 30 minutes)
      *     @var string $responseTimesStartDate optional (the number of response time logs to be returned (descending order). If empty, last 24 hours of logs are returned (if responseTimesStartDate and responseTimesEndDate are not used).
      *     @var string $responseTimesEndDate optional and works only for the Pro Plan as 24 hour+ logs are kept only in the Pro Plan (ending date of the response times, formatted as 2015-04-23 and must be used with responseTimesStartDate) (can only be used if monitors parameter is used with a single monitorID and responseTimesEndDate - responseTimesStartDate can't be more than 7 days)
@@ -87,7 +87,7 @@ class GetMonitors extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\BaseEndp
      *
      * @return null|\Montross50\UptimeRobotApi\SDK\Model\GetMonitorsResponse
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $status) {
             return $serializer->deserialize($body, 'Montross50\\UptimeRobotApi\\SDK\\Model\\GetMonitorsResponse', 'json');

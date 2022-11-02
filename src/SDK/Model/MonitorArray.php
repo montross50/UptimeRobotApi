@@ -5,13 +5,13 @@ namespace Montross50\UptimeRobotApi\SDK\Model;
 class MonitorArray
 {
     /**
-     *
+     * 
      *
      * @var Monitor[]
      */
     protected $monitor;
     /**
-     *
+     * 
      *
      * @return Monitor[]
      */
@@ -20,7 +20,7 @@ class MonitorArray
         return $this->monitor;
     }
     /**
-     *
+     * 
      *
      * @param Monitor[] $monitor
      *

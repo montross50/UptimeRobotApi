@@ -11,9 +11,9 @@ class NewAlertContact extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Base
      *     @var string $apiKey API key
      *     @var string $format Response format
      *     @var string $noJsonCallback Return raw json
-     *     @var string $alertContactType
-     *     @var string $alertContactValue
-     *     @var string $alertContactFriendlyName
+     *     @var string $alertContactType 
+     *     @var string $alertContactValue 
+     *     @var string $alertContactFriendlyName 
      * }
      */
     public function __construct(array $queryParameters = array())
@@ -59,7 +59,7 @@ class NewAlertContact extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Base
      *
      * @return null|\Montross50\UptimeRobotApi\SDK\Model\AlertContactResponse
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType)
+    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (200 === $status) {
             return $serializer->deserialize($body, 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContactResponse', 'json');

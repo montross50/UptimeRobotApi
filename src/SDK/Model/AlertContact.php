@@ -5,43 +5,43 @@ namespace Montross50\UptimeRobotApi\SDK\Model;
 class AlertContact
 {
     /**
-     *
+     * 
      *
      * @var string
      */
     protected $id;
     /**
-     *
+     * 
      *
      * @var string
      */
     protected $type;
     /**
-     *
+     * 
      *
      * @var string
      */
     protected $value;
     /**
-     *
+     * 
      *
      * @var string
      */
     protected $friendlyname;
     /**
-     *
+     * 
      *
      * @var string
      */
     protected $threshold;
     /**
-     *
+     * 
      *
      * @var string
      */
     protected $recurrence;
     /**
-     *
+     * 
      *
      * @return string
      */
@@ -50,7 +50,7 @@ class AlertContact
         return $this->id;
     }
     /**
-     *
+     * 
      *
      * @param string $id
      *
@@ -62,7 +62,7 @@ class AlertContact
         return $this;
     }
     /**
-     *
+     * 
      *
      * @return string
      */
@@ -71,7 +71,7 @@ class AlertContact
         return $this->type;
     }
     /**
-     *
+     * 
      *
      * @param string $type
      *
@@ -83,7 +83,7 @@ class AlertContact
         return $this;
     }
     /**
-     *
+     * 
      *
      * @return string
      */
@@ -92,7 +92,7 @@ class AlertContact
         return $this->value;
     }
     /**
-     *
+     * 
      *
      * @param string $value
      *
@@ -104,7 +104,7 @@ class AlertContact
         return $this;
     }
     /**
-     *
+     * 
      *
      * @return string
      */
@@ -113,7 +113,7 @@ class AlertContact
         return $this->friendlyname;
     }
     /**
-     *
+     * 
      *
      * @param string $friendlyname
      *
@@ -125,7 +125,7 @@ class AlertContact
         return $this;
     }
     /**
-     *
+     * 
      *
      * @return string
      */
@@ -134,7 +134,7 @@ class AlertContact
         return $this->threshold;
     }
     /**
-     *
+     * 
      *
      * @param string $threshold
      *
@@ -146,7 +146,7 @@ class AlertContact
         return $this;
     }
     /**
-     *
+     * 
      *
      * @return string
      */
@@ -155,7 +155,7 @@ class AlertContact
         return $this->recurrence;
     }
     /**
-     *
+     * 
      *
      * @param string $recurrence
      *

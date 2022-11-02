@@ -5,13 +5,13 @@ namespace Montross50\UptimeRobotApi\SDK\Model;
 class AlertContactArray
 {
     /**
-     *
+     * 
      *
      * @var AlertContact[]
      */
     protected $alertcontact;
     /**
-     *
+     * 
      *
      * @return AlertContact[]
      */
@@ -20,7 +20,7 @@ class AlertContactArray
         return $this->alertcontact;
     }
     /**
-     *
+     * 
      *
      * @param AlertContact[] $alertcontact
      *

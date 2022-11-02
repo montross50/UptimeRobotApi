@@ -2,10 +2,10 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Exception;
 
-class DeleteMonitorBadRequestException extends \RuntimeException implements ClientException
+class DeleteMonitorBadRequestException extends BadRequestException
 {
     public function __construct()
     {
-        parent::__construct('bad parameter', 400);
+        parent::__construct('bad parameter');
     }
 }

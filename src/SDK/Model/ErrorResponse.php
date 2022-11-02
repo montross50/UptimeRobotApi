@@ -5,25 +5,25 @@ namespace Montross50\UptimeRobotApi\SDK\Model;
 class ErrorResponse
 {
     /**
-     *
+     * 
      *
      * @var string
      */
     protected $stat;
     /**
-     *
+     * 
      *
      * @var string
      */
     protected $id;
     /**
-     *
+     * 
      *
      * @var string
      */
     protected $message;
     /**
-     *
+     * 
      *
      * @return string
      */
@@ -32,7 +32,7 @@ class ErrorResponse
         return $this->stat;
     }
     /**
-     *
+     * 
      *
      * @param string $stat
      *
@@ -44,7 +44,7 @@ class ErrorResponse
         return $this;
     }
     /**
-     *
+     * 
      *
      * @return string
      */
@@ -53,7 +53,7 @@ class ErrorResponse
         return $this->id;
     }
     /**
-     *
+     * 
      *
      * @param string $id
      *
@@ -65,7 +65,7 @@ class ErrorResponse
         return $this;
     }
     /**
-     *
+     * 
      *
      * @return string
      */
@@ -74,7 +74,7 @@ class ErrorResponse
         return $this->message;
     }
     /**
-     *
+     * 
      *
      * @param string $message
      *
