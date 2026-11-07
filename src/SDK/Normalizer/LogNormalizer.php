@@ -2,40 +2,40 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class LogNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null)
+    use ValidatorTrait;
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === 'Montross50\\UptimeRobotApi\\SDK\\Model\\Log';
+        return $type === \Montross50\UptimeRobotApi\SDK\Model\Log::class;
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === 'Montross50\\UptimeRobotApi\\SDK\\Model\\Log';
+        return is_object($data) && get_class($data) === \Montross50\UptimeRobotApi\SDK\Model\Log::class;
     }
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Montross50\UptimeRobotApi\SDK\Model\Log();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
-        }
-        $object = new \Montross50\UptimeRobotApi\SDK\Model\Log();
-        if (null === $data) {
-            return $object;
         }
         if (\array_key_exists('type', $data)) {
             $object->setType($data['type']);
@@ -44,30 +44,34 @@ class LogNormalizer implements DenormalizerInterface, NormalizerInterface, Denor
             $object->setDatetime($data['datetime']);
         }
         if (\array_key_exists('alertcontact', $data)) {
-            $values = array();
+            $values = [];
             foreach ($data['alertcontact'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContact', 'json', $context);
+                $values[] = $this->denormalizer->denormalize($value, \Montross50\UptimeRobotApi\SDK\Model\AlertContact::class, 'json', $context);
             }
             $object->setAlertcontact($values);
         }
         return $object;
     }
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = array();
-        if (null !== $object->getType()) {
-            $data['type'] = $object->getType();
+        $dataArray = [];
+        if ($data->isInitialized('type') && null !== $data->getType()) {
+            $dataArray['type'] = $data->getType();
         }
-        if (null !== $object->getDatetime()) {
-            $data['datetime'] = $object->getDatetime();
+        if ($data->isInitialized('datetime') && null !== $data->getDatetime()) {
+            $dataArray['datetime'] = $data->getDatetime();
         }
-        if (null !== $object->getAlertcontact()) {
-            $values = array();
-            foreach ($object->getAlertcontact() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+        if ($data->isInitialized('alertcontact') && null !== $data->getAlertcontact()) {
+            $values = [];
+            foreach ($data->getAlertcontact() as $value) {
+                $values[] = $value === null ? null : new \Montross50\UptimeRobotApi\SDK\Runtime\JsonObject($this->normalizer->normalize($value, 'json', $context));
             }
-            $data['alertcontact'] = $values;
+            $dataArray['alertcontact'] = $values;
         }
-        return $data;
+        return $dataArray;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Montross50\UptimeRobotApi\SDK\Model\Log::class => false];
     }
 }

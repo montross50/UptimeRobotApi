@@ -5,191 +5,164 @@ namespace Montross50\UptimeRobotApi\SDK\Model;
 class GetMonitorsResponse
 {
     /**
-     *
-     *
+     * @var array
+     */
+    protected $initialized = [];
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
      * @var string
      */
     protected $stat;
     /**
-     *
-     *
      * @var string
      */
     protected $offset;
     /**
-     *
-     *
      * @var string
      */
     protected $limit;
     /**
-     *
-     *
      * @var string
      */
     protected $total;
     /**
-     *
-     *
      * @var MonitorArray
      */
     protected $monitors;
     /**
-     *
-     *
      * @var string
      */
     protected $id;
     /**
-     *
-     *
      * @var string
      */
     protected $message;
     /**
-     *
-     *
      * @return string
      */
-    public function getStat() : string
+    public function getStat(): string
     {
         return $this->stat;
     }
     /**
-     *
-     *
      * @param string $stat
      *
      * @return self
      */
-    public function setStat(string $stat) : self
+    public function setStat(string $stat): self
     {
+        $this->initialized['stat'] = true;
         $this->stat = $stat;
         return $this;
     }
     /**
-     *
-     *
      * @return string
      */
-    public function getOffset() : string
+    public function getOffset(): string
     {
         return $this->offset;
     }
     /**
-     *
-     *
      * @param string $offset
      *
      * @return self
      */
-    public function setOffset(string $offset) : self
+    public function setOffset(string $offset): self
     {
+        $this->initialized['offset'] = true;
         $this->offset = $offset;
         return $this;
     }
     /**
-     *
-     *
      * @return string
      */
-    public function getLimit() : string
+    public function getLimit(): string
     {
         return $this->limit;
     }
     /**
-     *
-     *
      * @param string $limit
      *
      * @return self
      */
-    public function setLimit(string $limit) : self
+    public function setLimit(string $limit): self
     {
+        $this->initialized['limit'] = true;
         $this->limit = $limit;
         return $this;
     }
     /**
-     *
-     *
      * @return string
      */
-    public function getTotal() : string
+    public function getTotal(): string
     {
         return $this->total;
     }
     /**
-     *
-     *
      * @param string $total
      *
      * @return self
      */
-    public function setTotal(string $total) : self
+    public function setTotal(string $total): self
     {
+        $this->initialized['total'] = true;
         $this->total = $total;
         return $this;
     }
     /**
-     *
-     *
      * @return MonitorArray
      */
-    public function getMonitors() : MonitorArray
+    public function getMonitors(): MonitorArray
     {
         return $this->monitors;
     }
     /**
-     *
-     *
      * @param MonitorArray $monitors
      *
      * @return self
      */
-    public function setMonitors(MonitorArray $monitors) : self
+    public function setMonitors(MonitorArray $monitors): self
     {
+        $this->initialized['monitors'] = true;
         $this->monitors = $monitors;
         return $this;
     }
     /**
-     *
-     *
      * @return string
      */
-    public function getId() : string
+    public function getId(): string
     {
         return $this->id;
     }
     /**
-     *
-     *
      * @param string $id
      *
      * @return self
      */
-    public function setId(string $id) : self
+    public function setId(string $id): self
     {
+        $this->initialized['id'] = true;
         $this->id = $id;
         return $this;
     }
     /**
-     *
-     *
      * @return string
      */
-    public function getMessage() : string
+    public function getMessage(): string
     {
         return $this->message;
     }
     /**
-     *
-     *
      * @param string $message
      *
      * @return self
      */
-    public function setMessage(string $message) : self
+    public function setMessage(string $message): self
     {
+        $this->initialized['message'] = true;
         $this->message = $message;
         return $this;
     }

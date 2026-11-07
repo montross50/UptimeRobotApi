@@ -6,7 +6,6 @@ class Client extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Client
 {
     /**
      * Account details (max number of monitors that can be added and number of up/down/paused monitors) can be grabbed using this method.
-     *
      * @param array $queryParameters {
      *     @var string $apiKey API key
      *     @var string $format Response format
@@ -16,15 +15,14 @@ class Client extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Client
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\GetAccountDetailsBadRequestException
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\GetAccountDetailsInternalServerErrorException
      *
-     * @return null|\Montross50\UptimeRobotApi\SDK\Model\AccountDetails|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? null|\Montross50\UptimeRobotApi\SDK\Model\AccountDetails : \Psr\Http\Message\ResponseInterface)
      */
-    public function getAccountDetails(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
+    public function getAccountDetails(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\GetAccountDetails($queryParameters), $fetch);
     }
     /**
      * This is a Swiss-Army knife type of a method for getting any information on monitors. By default, it lists all the monitors in a user's account, their friendly names, types (http, keyword, port, etc.), statuses (up, down, etc.) and uptime ratios. There are optional parameters which lets the getMonitors method to output information on any given monitors rather than all of them.
-     *
      * @param array $queryParameters {
      *     @var string $apiKey API key
      *     @var string $format Response format
@@ -51,15 +49,14 @@ class Client extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Client
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\GetMonitorsBadRequestException
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\GetMonitorsInternalServerErrorException
      *
-     * @return null|\Montross50\UptimeRobotApi\SDK\Model\GetMonitorsResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? null|\Montross50\UptimeRobotApi\SDK\Model\GetMonitorsResponse : \Psr\Http\Message\ResponseInterface)
      */
-    public function getMonitors(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
+    public function getMonitors(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\GetMonitors($queryParameters), $fetch);
     }
     /**
      * New monitors of any type can be created using this method.
-     *
      * @param array $queryParameters {
      *     @var string $apiKey API key
      *     @var string $format Response format
@@ -80,15 +77,14 @@ class Client extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Client
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\CreateMonitorBadRequestException
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\CreateMonitorInternalServerErrorException
      *
-     * @return null|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? null|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse : \Psr\Http\Message\ResponseInterface)
      */
-    public function createMonitor(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
+    public function createMonitor(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\CreateMonitor($queryParameters), $fetch);
     }
     /**
      * Monitors can be deleted using this method.
-     *
      * @param array $queryParameters {
      *     @var string $apiKey API key
      *     @var string $format Response format
@@ -99,15 +95,14 @@ class Client extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Client
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\DeleteMonitorBadRequestException
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\DeleteMonitorInternalServerErrorException
      *
-     * @return null|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? null|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse : \Psr\Http\Message\ResponseInterface)
      */
-    public function deleteMonitor(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
+    public function deleteMonitor(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\DeleteMonitor($queryParameters), $fetch);
     }
     /**
      * Monitors can be reset (deleting all stats and response time data) using this method.
-     *
      * @param array $queryParameters {
      *     @var string $apiKey API key
      *     @var string $format Response format
@@ -118,15 +113,14 @@ class Client extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Client
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\ResetMonitorBadRequestException
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\ResetMonitorInternalServerErrorException
      *
-     * @return null|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? null|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse : \Psr\Http\Message\ResponseInterface)
      */
-    public function resetMonitor(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
+    public function resetMonitor(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\ResetMonitor($queryParameters), $fetch);
     }
     /**
      * Monitors can be edited using this method. Important: The type of a monitor can not be edited (like changing a HTTP monitor into a Port monitor). For such cases, deleting the monitor and re-creating a new one is adviced.
-     *
      * @param array $queryParameters {
      *     @var string $apiKey API key
      *     @var string $format Response format
@@ -148,15 +142,14 @@ class Client extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Client
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\EditMonitorBadRequestException
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\EditMonitorInternalServerErrorException
      *
-     * @return null|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? null|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse : \Psr\Http\Message\ResponseInterface)
      */
-    public function editMonitor(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
+    public function editMonitor(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\EditMonitor($queryParameters), $fetch);
     }
     /**
      * The list of alert contacts can be called with this method.
-     *
      * @param array $queryParameters {
      *     @var string $apiKey API key
      *     @var string $format Response format
@@ -169,15 +162,14 @@ class Client extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Client
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\GetAlertContactsBadRequestException
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\GetAlertContactsInternalServerErrorException
      *
-     * @return null|\Montross50\UptimeRobotApi\SDK\Model\GetAlertContactsResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? null|\Montross50\UptimeRobotApi\SDK\Model\GetAlertContactsResponse : \Psr\Http\Message\ResponseInterface)
      */
-    public function getAlertContacts(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
+    public function getAlertContacts(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\GetAlertContacts($queryParameters), $fetch);
     }
     /**
      * New alert contacts of any type (mobile/SMS alert contacts are not supported yet) can be created using this method. The alert contacts created using the API are validated with the same way as they were created from uptimerobot.com (activation link for e-mails, tc.).
-     *
      * @param array $queryParameters {
      *     @var string $apiKey API key
      *     @var string $format Response format
@@ -190,15 +182,14 @@ class Client extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Client
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\NewAlertContactBadRequestException
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\NewAlertContactInternalServerErrorException
      *
-     * @return null|\Montross50\UptimeRobotApi\SDK\Model\AlertContactResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? null|\Montross50\UptimeRobotApi\SDK\Model\AlertContactResponse : \Psr\Http\Message\ResponseInterface)
      */
-    public function newAlertContact(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
+    public function newAlertContact(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\NewAlertContact($queryParameters), $fetch);
     }
     /**
      * Alert contacts can be deleted using this method.
-     *
      * @param array $queryParameters {
      *     @var string $apiKey API key
      *     @var string $format Response format
@@ -209,28 +200,34 @@ class Client extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Client
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\DeleteAlertContactBadRequestException
      * @throws \Montross50\UptimeRobotApi\SDK\Exception\DeleteAlertContactInternalServerErrorException
      *
-     * @return null|\Montross50\UptimeRobotApi\SDK\Model\AlertContactResponse|\Psr\Http\Message\ResponseInterface
+     * @return ($fetch is 'object' ? null|\Montross50\UptimeRobotApi\SDK\Model\AlertContactResponse : \Psr\Http\Message\ResponseInterface)
      */
-    public function deleteAlertContact(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
+    public function deleteAlertContact(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
         return $this->executeEndpoint(new \Montross50\UptimeRobotApi\SDK\Endpoint\DeleteAlertContact($queryParameters), $fetch);
     }
-    public static function create($httpClient = null, array $additionalPlugins = array())
+    public static function create($httpClient = null, array $additionalPlugins = [], array $additionalNormalizers = [], bool $applyServerPlugins = true)
     {
+        $plugins = [];
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
-            $plugins = array();
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.uptimerobot.com/');
+        }
+        if ($applyServerPlugins) {
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUriFactory()->createUri('https://api.uptimerobot.com/');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             $plugins[] = new \Http\Client\Common\Plugin\AddPathPlugin($uri);
-            if (count($additionalPlugins) > 0) {
-                $plugins = array_merge($plugins, $additionalPlugins);
-            }
-            $httpClient = new \Http\Client\Common\PluginClient($httpClient, $plugins);
         }
+        if (count($additionalPlugins) > 0) {
+            $plugins = array_merge($plugins, $additionalPlugins);
+        }
+        $httpClient = new \Http\Client\Common\PluginClient($httpClient, $plugins);
         $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
         $streamFactory = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
-        $serializer = new \Symfony\Component\Serializer\Serializer(array(new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \Montross50\UptimeRobotApi\SDK\Normalizer\JaneObjectNormalizer()), array(new \Symfony\Component\Serializer\Encoder\JsonEncoder(new \Symfony\Component\Serializer\Encoder\JsonEncode(), new \Symfony\Component\Serializer\Encoder\JsonDecode(array('json_decode_associative' => true)))));
+        $normalizers = [new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \Montross50\UptimeRobotApi\SDK\Normalizer\JaneObjectNormalizer()];
+        if (count($additionalNormalizers) > 0) {
+            $normalizers = array_merge($normalizers, $additionalNormalizers);
+        }
+        $serializer = new \Symfony\Component\Serializer\Serializer($normalizers, [new \Symfony\Component\Serializer\Encoder\JsonEncoder(new \Symfony\Component\Serializer\Encoder\JsonEncode(), new \Symfony\Component\Serializer\Encoder\JsonDecode(['json_decode_associative' => true])), new \Montross50\UptimeRobotApi\SDK\Runtime\Client\FormEncoder()]);
         return new static($httpClient, $requestFactory, $serializer, $streamFactory);
     }
 }

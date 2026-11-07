@@ -6,7 +6,6 @@ class ResetMonitor extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\BaseEnd
 {
     /**
      * Monitors can be reset (deleting all stats and response time data) using this method.
-     *
      * @param array $queryParameters {
      *     @var string $apiKey API key
      *     @var string $format Response format
@@ -14,37 +13,37 @@ class ResetMonitor extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\BaseEnd
      *     @var string $monitorID ID of monitor to reset
      * }
      */
-    public function __construct(array $queryParameters = array())
+    public function __construct(array $queryParameters = [])
     {
         $this->queryParameters = $queryParameters;
     }
     use \Montross50\UptimeRobotApi\SDK\Runtime\Client\EndpointTrait;
-    public function getMethod() : string
+    public function getMethod(): string
     {
         return 'GET';
     }
-    public function getUri() : string
+    public function getUri(): string
     {
         return '/resetMonitor';
     }
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        return array(array(), null);
+        return [[], null];
     }
-    public function getExtraHeaders() : array
+    public function getExtraHeaders(): array
     {
-        return array('Accept' => array('application/json'));
+        return ['Accept' => ['application/json']];
     }
-    protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
+    protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('apiKey', 'format', 'noJsonCallback', 'monitorID'));
-        $optionsResolver->setRequired(array('apiKey', 'monitorID'));
-        $optionsResolver->setDefaults(array('format' => 'json', 'noJsonCallback' => '1'));
-        $optionsResolver->setAllowedTypes('apiKey', array('string'));
-        $optionsResolver->setAllowedTypes('format', array('string'));
-        $optionsResolver->setAllowedTypes('noJsonCallback', array('string'));
-        $optionsResolver->setAllowedTypes('monitorID', array('string'));
+        $optionsResolver->setDefined(['apiKey', 'format', 'noJsonCallback', 'monitorID']);
+        $optionsResolver->setRequired(['apiKey', 'monitorID']);
+        $optionsResolver->setDefaults(['format' => 'json', 'noJsonCallback' => '1']);
+        $optionsResolver->addAllowedTypes('apiKey', ['string']);
+        $optionsResolver->addAllowedTypes('format', ['string']);
+        $optionsResolver->addAllowedTypes('noJsonCallback', ['string']);
+        $optionsResolver->addAllowedTypes('monitorID', ['string']);
         return $optionsResolver;
     }
     /**
@@ -55,20 +54,22 @@ class ResetMonitor extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\BaseEnd
      *
      * @return null|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
-            return $serializer->deserialize($body, 'Montross50\\UptimeRobotApi\\SDK\\Model\\MonitorResponse', 'json');
+            return $serializer->deserialize($body, 'Montross50\UptimeRobotApi\SDK\Model\MonitorResponse', 'json');
         }
         if (400 === $status) {
-            throw new \Montross50\UptimeRobotApi\SDK\Exception\ResetMonitorBadRequestException();
+            throw new \Montross50\UptimeRobotApi\SDK\Exception\ResetMonitorBadRequestException($response);
         }
         if (500 === $status) {
-            throw new \Montross50\UptimeRobotApi\SDK\Exception\ResetMonitorInternalServerErrorException();
+            throw new \Montross50\UptimeRobotApi\SDK\Exception\ResetMonitorInternalServerErrorException($response);
         }
     }
-    public function getAuthenticationScopes() : array
+    public function getAuthenticationScopes(): array
     {
-        return array();
+        return [];
     }
 }

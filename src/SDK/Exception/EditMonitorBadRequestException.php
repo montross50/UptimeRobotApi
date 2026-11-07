@@ -2,10 +2,19 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Exception;
 
-class EditMonitorBadRequestException extends \RuntimeException implements ClientException
+class EditMonitorBadRequestException extends BadRequestException
 {
-    public function __construct()
+    /**
+     * @var \Psr\Http\Message\ResponseInterface
+     */
+    private $response;
+    public function __construct(?\Psr\Http\Message\ResponseInterface $response = null)
     {
-        parent::__construct('bad parameter', 400);
+        parent::__construct('bad parameter');
+        $this->response = $response;
+    }
+    public function getResponse(): ?\Psr\Http\Message\ResponseInterface
+    {
+        return $this->response;
     }
 }

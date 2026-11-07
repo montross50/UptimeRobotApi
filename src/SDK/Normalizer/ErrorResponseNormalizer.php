@@ -2,40 +2,40 @@
 
 namespace Montross50\UptimeRobotApi\SDK\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
 use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class ErrorResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null)
+    use ValidatorTrait;
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === 'Montross50\\UptimeRobotApi\\SDK\\Model\\ErrorResponse';
+        return $type === \Montross50\UptimeRobotApi\SDK\Model\ErrorResponse::class;
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === 'Montross50\\UptimeRobotApi\\SDK\\Model\\ErrorResponse';
+        return is_object($data) && get_class($data) === \Montross50\UptimeRobotApi\SDK\Model\ErrorResponse::class;
     }
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Montross50\UptimeRobotApi\SDK\Model\ErrorResponse();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
-        }
-        $object = new \Montross50\UptimeRobotApi\SDK\Model\ErrorResponse();
-        if (null === $data) {
-            return $object;
         }
         if (\array_key_exists('stat', $data)) {
             $object->setStat($data['stat']);
@@ -48,18 +48,22 @@ class ErrorResponseNormalizer implements DenormalizerInterface, NormalizerInterf
         }
         return $object;
     }
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = array();
-        if (null !== $object->getStat()) {
-            $data['stat'] = $object->getStat();
+        $dataArray = [];
+        if ($data->isInitialized('stat') && null !== $data->getStat()) {
+            $dataArray['stat'] = $data->getStat();
         }
-        if (null !== $object->getId()) {
-            $data['id'] = $object->getId();
+        if ($data->isInitialized('id') && null !== $data->getId()) {
+            $dataArray['id'] = $data->getId();
         }
-        if (null !== $object->getMessage()) {
-            $data['message'] = $object->getMessage();
+        if ($data->isInitialized('message') && null !== $data->getMessage()) {
+            $dataArray['message'] = $data->getMessage();
         }
-        return $data;
+        return $dataArray;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Montross50\UptimeRobotApi\SDK\Model\ErrorResponse::class => false];
     }
 }

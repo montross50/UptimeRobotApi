@@ -30,9 +30,11 @@ class UptimeRobotApiServiceProvider extends ServiceProvider
             __DIR__ . '/../config/uptimerobot.php',
             'uptimerobot'
         );
+        $this->app->bindIf(Client::class, function () {
+            return Client::create();
+        });
         $this->app->bind(UptimeRobotResourceInterface::class, function ($app) {
-            $api = Client::create();
-            $urm = new UptimeRobotManager($api);
+            $urm = new UptimeRobotManager($app->make(Client::class));
             $apiKey = config('uptimerobot.apiKey', '');
             $urm->setApiKey($apiKey);
             return $urm;
