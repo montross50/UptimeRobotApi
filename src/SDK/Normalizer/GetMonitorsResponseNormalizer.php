@@ -4,41 +4,38 @@ namespace Montross50\UptimeRobotApi\SDK\Normalizer;
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class GetMonitorsResponseNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    use ValidatorTrait;
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === 'Montross50\\UptimeRobotApi\\SDK\\Model\\GetMonitorsResponse';
+        return $type === \Montross50\UptimeRobotApi\SDK\Model\GetMonitorsResponse::class;
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === 'Montross50\\UptimeRobotApi\\SDK\\Model\\GetMonitorsResponse';
+        return is_object($data) && get_class($data) === \Montross50\UptimeRobotApi\SDK\Model\GetMonitorsResponse::class;
     }
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Montross50\UptimeRobotApi\SDK\Model\GetMonitorsResponse();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
-        }
-        $object = new \Montross50\UptimeRobotApi\SDK\Model\GetMonitorsResponse();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
         }
         if (\array_key_exists('stat', $data)) {
             $object->setStat($data['stat']);
@@ -53,7 +50,7 @@ class GetMonitorsResponseNormalizer implements DenormalizerInterface, Normalizer
             $object->setTotal($data['total']);
         }
         if (\array_key_exists('monitors', $data)) {
-            $object->setMonitors($this->denormalizer->denormalize($data['monitors'], 'Montross50\\UptimeRobotApi\\SDK\\Model\\MonitorArray', 'json', $context));
+            $object->setMonitors($this->denormalizer->denormalize($data['monitors'], \Montross50\UptimeRobotApi\SDK\Model\MonitorArray::class, 'json', $context));
         }
         if (\array_key_exists('id', $data)) {
             $object->setId($data['id']);
@@ -63,33 +60,34 @@ class GetMonitorsResponseNormalizer implements DenormalizerInterface, Normalizer
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = array();
-        if (null !== $object->getStat()) {
-            $data['stat'] = $object->getStat();
+        $dataArray = [];
+        if ($data->isInitialized('stat') && null !== $data->getStat()) {
+            $dataArray['stat'] = $data->getStat();
         }
-        if (null !== $object->getOffset()) {
-            $data['offset'] = $object->getOffset();
+        if ($data->isInitialized('offset') && null !== $data->getOffset()) {
+            $dataArray['offset'] = $data->getOffset();
         }
-        if (null !== $object->getLimit()) {
-            $data['limit'] = $object->getLimit();
+        if ($data->isInitialized('limit') && null !== $data->getLimit()) {
+            $dataArray['limit'] = $data->getLimit();
         }
-        if (null !== $object->getTotal()) {
-            $data['total'] = $object->getTotal();
+        if ($data->isInitialized('total') && null !== $data->getTotal()) {
+            $dataArray['total'] = $data->getTotal();
         }
-        if (null !== $object->getMonitors()) {
-            $data['monitors'] = $this->normalizer->normalize($object->getMonitors(), 'json', $context);
+        if ($data->isInitialized('monitors') && null !== $data->getMonitors()) {
+            $dataArray['monitors'] = $data->getMonitors() === null ? null : new \Montross50\UptimeRobotApi\SDK\Runtime\JsonObject($this->normalizer->normalize($data->getMonitors(), 'json', $context));
         }
-        if (null !== $object->getId()) {
-            $data['id'] = $object->getId();
+        if ($data->isInitialized('id') && null !== $data->getId()) {
+            $dataArray['id'] = $data->getId();
         }
-        if (null !== $object->getMessage()) {
-            $data['message'] = $object->getMessage();
+        if ($data->isInitialized('message') && null !== $data->getMessage()) {
+            $dataArray['message'] = $data->getMessage();
         }
-        return $data;
+        return $dataArray;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Montross50\UptimeRobotApi\SDK\Model\GetMonitorsResponse::class => false];
     }
 }

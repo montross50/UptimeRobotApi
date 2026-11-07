@@ -9,27 +9,14 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 use Symfony\Component\Serializer\SerializerInterface;
-
 abstract class Client
 {
     public const FETCH_RESPONSE = 'response';
     public const FETCH_OBJECT = 'object';
-    /**
-     * @var ClientInterface
-     */
-    protected $httpClient;
-    /**
-     * @var RequestFactoryInterface
-     */
-    protected $requestFactory;
-    /**
-     * @var SerializerInterface
-     */
-    protected $serializer;
-    /**
-     * @var StreamFactoryInterface
-     */
-    protected $streamFactory;
+    protected ClientInterface $httpClient;
+    protected RequestFactoryInterface $requestFactory;
+    protected SerializerInterface $serializer;
+    protected StreamFactoryInterface $streamFactory;
     public function __construct(ClientInterface $httpClient, RequestFactoryInterface $requestFactory, SerializerInterface $serializer, StreamFactoryInterface $streamFactory)
     {
         $this->httpClient = $httpClient;
@@ -45,15 +32,15 @@ abstract class Client
         }
         return $endpoint->parseResponse($this->processEndpoint($endpoint), $this->serializer, $fetch);
     }
-    public function executeRawEndpoint(Endpoint $endpoint) : ResponseInterface
+    public function executeRawEndpoint(Endpoint $endpoint): ResponseInterface
     {
         return $this->processEndpoint($endpoint);
     }
-    private function processEndpoint(Endpoint $endpoint) : ResponseInterface
+    private function processEndpoint(Endpoint $endpoint): ResponseInterface
     {
         [$bodyHeaders, $body] = $endpoint->getBody($this->serializer, $this->streamFactory);
         $queryString = $endpoint->getQueryString();
-        $uriGlue = false === strpos($endpoint->getUri(), '?') ? '?' : '&';
+        $uriGlue = !str_contains($endpoint->getUri(), '?') ? '?' : '&';
         $uri = $queryString !== '' ? $endpoint->getUri() . $uriGlue . $queryString : $endpoint->getUri();
         $request = $this->requestFactory->createRequest($endpoint->getMethod(), $uri);
         if ($body) {
@@ -69,7 +56,7 @@ abstract class Client
             }
         }
         foreach ($endpoint->getHeaders($bodyHeaders) as $name => $value) {
-            $request = $request->withHeader($name, $value);
+            $request = $request->withHeader($name, !is_bool($value) ? $value : ($value ? 'true' : 'false'));
         }
         if (count($endpoint->getAuthenticationScopes()) > 0) {
             $scopes = [];

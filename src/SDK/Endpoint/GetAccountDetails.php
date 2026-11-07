@@ -6,43 +6,42 @@ class GetAccountDetails extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Ba
 {
     /**
      * Account details (max number of monitors that can be added and number of up/down/paused monitors) can be grabbed using this method.
-     *
      * @param array $queryParameters {
      *     @var string $apiKey API key
      *     @var string $format Response format
      *     @var string $noJsonCallback Return raw json
      * }
      */
-    public function __construct(array $queryParameters = array())
+    public function __construct(array $queryParameters = [])
     {
         $this->queryParameters = $queryParameters;
     }
     use \Montross50\UptimeRobotApi\SDK\Runtime\Client\EndpointTrait;
-    public function getMethod() : string
+    public function getMethod(): string
     {
         return 'GET';
     }
-    public function getUri() : string
+    public function getUri(): string
     {
         return '/getAccountDetails';
     }
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        return array(array(), null);
+        return [[], null];
     }
-    public function getExtraHeaders() : array
+    public function getExtraHeaders(): array
     {
-        return array('Accept' => array('application/json'));
+        return ['Accept' => ['application/json']];
     }
-    protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
+    protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('apiKey', 'format', 'noJsonCallback'));
-        $optionsResolver->setRequired(array('apiKey'));
-        $optionsResolver->setDefaults(array('format' => 'json', 'noJsonCallback' => '1'));
-        $optionsResolver->setAllowedTypes('apiKey', array('string'));
-        $optionsResolver->setAllowedTypes('format', array('string'));
-        $optionsResolver->setAllowedTypes('noJsonCallback', array('string'));
+        $optionsResolver->setDefined(['apiKey', 'format', 'noJsonCallback']);
+        $optionsResolver->setRequired(['apiKey']);
+        $optionsResolver->setDefaults(['format' => 'json', 'noJsonCallback' => '1']);
+        $optionsResolver->addAllowedTypes('apiKey', ['string']);
+        $optionsResolver->addAllowedTypes('format', ['string']);
+        $optionsResolver->addAllowedTypes('noJsonCallback', ['string']);
         return $optionsResolver;
     }
     /**
@@ -53,20 +52,22 @@ class GetAccountDetails extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Ba
      *
      * @return null|\Montross50\UptimeRobotApi\SDK\Model\AccountDetails
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
-            return $serializer->deserialize($body, 'Montross50\\UptimeRobotApi\\SDK\\Model\\AccountDetails', 'json');
+            return $serializer->deserialize($body, 'Montross50\UptimeRobotApi\SDK\Model\AccountDetails', 'json');
         }
         if (400 === $status) {
-            throw new \Montross50\UptimeRobotApi\SDK\Exception\GetAccountDetailsBadRequestException();
+            throw new \Montross50\UptimeRobotApi\SDK\Exception\GetAccountDetailsBadRequestException($response);
         }
         if (500 === $status) {
-            throw new \Montross50\UptimeRobotApi\SDK\Exception\GetAccountDetailsInternalServerErrorException();
+            throw new \Montross50\UptimeRobotApi\SDK\Exception\GetAccountDetailsInternalServerErrorException($response);
         }
     }
-    public function getAuthenticationScopes() : array
+    public function getAuthenticationScopes(): array
     {
-        return array();
+        return [];
     }
 }

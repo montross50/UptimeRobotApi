@@ -4,41 +4,38 @@ namespace Montross50\UptimeRobotApi\SDK\Normalizer;
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class AccountNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    use ValidatorTrait;
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === 'Montross50\\UptimeRobotApi\\SDK\\Model\\Account';
+        return $type === \Montross50\UptimeRobotApi\SDK\Model\Account::class;
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === 'Montross50\\UptimeRobotApi\\SDK\\Model\\Account';
+        return is_object($data) && get_class($data) === \Montross50\UptimeRobotApi\SDK\Model\Account::class;
     }
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Montross50\UptimeRobotApi\SDK\Model\Account();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
-        }
-        $object = new \Montross50\UptimeRobotApi\SDK\Model\Account();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
         }
         if (\array_key_exists('monitorLimit', $data)) {
             $object->setMonitorLimit($data['monitorLimit']);
@@ -57,27 +54,28 @@ class AccountNormalizer implements DenormalizerInterface, NormalizerInterface, D
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = array();
-        if (null !== $object->getMonitorLimit()) {
-            $data['monitorLimit'] = $object->getMonitorLimit();
+        $dataArray = [];
+        if ($data->isInitialized('monitorLimit') && null !== $data->getMonitorLimit()) {
+            $dataArray['monitorLimit'] = $data->getMonitorLimit();
         }
-        if (null !== $object->getMonitorInterval()) {
-            $data['monitorInterval'] = $object->getMonitorInterval();
+        if ($data->isInitialized('monitorInterval') && null !== $data->getMonitorInterval()) {
+            $dataArray['monitorInterval'] = $data->getMonitorInterval();
         }
-        if (null !== $object->getUpMonitors()) {
-            $data['upMonitors'] = $object->getUpMonitors();
+        if ($data->isInitialized('upMonitors') && null !== $data->getUpMonitors()) {
+            $dataArray['upMonitors'] = $data->getUpMonitors();
         }
-        if (null !== $object->getDownMonitors()) {
-            $data['downMonitors'] = $object->getDownMonitors();
+        if ($data->isInitialized('downMonitors') && null !== $data->getDownMonitors()) {
+            $dataArray['downMonitors'] = $data->getDownMonitors();
         }
-        if (null !== $object->getPausedMonitors()) {
-            $data['pausedMonitors'] = $object->getPausedMonitors();
+        if ($data->isInitialized('pausedMonitors') && null !== $data->getPausedMonitors()) {
+            $dataArray['pausedMonitors'] = $data->getPausedMonitors();
         }
-        return $data;
+        return $dataArray;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Montross50\UptimeRobotApi\SDK\Model\Account::class => false];
     }
 }

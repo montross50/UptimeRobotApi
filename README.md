@@ -14,7 +14,7 @@ Via Composer
 $ composer require montross50/uptime-robot-api
 ```
 
-This version (6.\*) supports Laravel 6.X only. If you need <= 5.X checkout a previous version.
+Version 9.\* supports Laravel 8 through 13 on PHP 8.1+. For older Laravel versions use a previous release.
 
 ## Config
 

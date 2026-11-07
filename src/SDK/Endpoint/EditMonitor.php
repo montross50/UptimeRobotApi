@@ -6,7 +6,6 @@ class EditMonitor extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\BaseEndp
 {
     /**
      * Monitors can be edited using this method. Important: The type of a monitor can not be edited (like changing a HTTP monitor into a Port monitor). For such cases, deleting the monitor and re-creating a new one is adviced.
-     *
      * @param array $queryParameters {
      *     @var string $apiKey API key
      *     @var string $format Response format
@@ -25,48 +24,48 @@ class EditMonitor extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\BaseEndp
      *     @var string $monitorID ID of monitor to edit
      * }
      */
-    public function __construct(array $queryParameters = array())
+    public function __construct(array $queryParameters = [])
     {
         $this->queryParameters = $queryParameters;
     }
     use \Montross50\UptimeRobotApi\SDK\Runtime\Client\EndpointTrait;
-    public function getMethod() : string
+    public function getMethod(): string
     {
         return 'GET';
     }
-    public function getUri() : string
+    public function getUri(): string
     {
         return '/editMonitor';
     }
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        return array(array(), null);
+        return [[], null];
     }
-    public function getExtraHeaders() : array
+    public function getExtraHeaders(): array
     {
-        return array('Accept' => array('application/json'));
+        return ['Accept' => ['application/json']];
     }
-    protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
+    protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('apiKey', 'format', 'noJsonCallback', 'monitorFriendlyName', 'monitorURL', 'monitorType', 'monitorSubType', 'monitorPort', 'monitorKeywordType', 'monitorKeywordValue', 'monitorHTTPUsername', 'monitorHTTPPassword', 'monitorAlertContacts', 'monitorInterval', 'monitorID'));
-        $optionsResolver->setRequired(array('apiKey', 'monitorID'));
-        $optionsResolver->setDefaults(array('format' => 'json', 'noJsonCallback' => '1'));
-        $optionsResolver->setAllowedTypes('apiKey', array('string'));
-        $optionsResolver->setAllowedTypes('format', array('string'));
-        $optionsResolver->setAllowedTypes('noJsonCallback', array('string'));
-        $optionsResolver->setAllowedTypes('monitorFriendlyName', array('string'));
-        $optionsResolver->setAllowedTypes('monitorURL', array('string'));
-        $optionsResolver->setAllowedTypes('monitorType', array('string'));
-        $optionsResolver->setAllowedTypes('monitorSubType', array('string'));
-        $optionsResolver->setAllowedTypes('monitorPort', array('string'));
-        $optionsResolver->setAllowedTypes('monitorKeywordType', array('string'));
-        $optionsResolver->setAllowedTypes('monitorKeywordValue', array('string'));
-        $optionsResolver->setAllowedTypes('monitorHTTPUsername', array('string'));
-        $optionsResolver->setAllowedTypes('monitorHTTPPassword', array('string'));
-        $optionsResolver->setAllowedTypes('monitorAlertContacts', array('string'));
-        $optionsResolver->setAllowedTypes('monitorInterval', array('string'));
-        $optionsResolver->setAllowedTypes('monitorID', array('string'));
+        $optionsResolver->setDefined(['apiKey', 'format', 'noJsonCallback', 'monitorFriendlyName', 'monitorURL', 'monitorType', 'monitorSubType', 'monitorPort', 'monitorKeywordType', 'monitorKeywordValue', 'monitorHTTPUsername', 'monitorHTTPPassword', 'monitorAlertContacts', 'monitorInterval', 'monitorID']);
+        $optionsResolver->setRequired(['apiKey', 'monitorID']);
+        $optionsResolver->setDefaults(['format' => 'json', 'noJsonCallback' => '1']);
+        $optionsResolver->addAllowedTypes('apiKey', ['string']);
+        $optionsResolver->addAllowedTypes('format', ['string']);
+        $optionsResolver->addAllowedTypes('noJsonCallback', ['string']);
+        $optionsResolver->addAllowedTypes('monitorFriendlyName', ['string']);
+        $optionsResolver->addAllowedTypes('monitorURL', ['string']);
+        $optionsResolver->addAllowedTypes('monitorType', ['string']);
+        $optionsResolver->addAllowedTypes('monitorSubType', ['string']);
+        $optionsResolver->addAllowedTypes('monitorPort', ['string']);
+        $optionsResolver->addAllowedTypes('monitorKeywordType', ['string']);
+        $optionsResolver->addAllowedTypes('monitorKeywordValue', ['string']);
+        $optionsResolver->addAllowedTypes('monitorHTTPUsername', ['string']);
+        $optionsResolver->addAllowedTypes('monitorHTTPPassword', ['string']);
+        $optionsResolver->addAllowedTypes('monitorAlertContacts', ['string']);
+        $optionsResolver->addAllowedTypes('monitorInterval', ['string']);
+        $optionsResolver->addAllowedTypes('monitorID', ['string']);
         return $optionsResolver;
     }
     /**
@@ -77,20 +76,22 @@ class EditMonitor extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\BaseEndp
      *
      * @return null|\Montross50\UptimeRobotApi\SDK\Model\MonitorResponse
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
-            return $serializer->deserialize($body, 'Montross50\\UptimeRobotApi\\SDK\\Model\\MonitorResponse', 'json');
+            return $serializer->deserialize($body, 'Montross50\UptimeRobotApi\SDK\Model\MonitorResponse', 'json');
         }
         if (400 === $status) {
-            throw new \Montross50\UptimeRobotApi\SDK\Exception\EditMonitorBadRequestException();
+            throw new \Montross50\UptimeRobotApi\SDK\Exception\EditMonitorBadRequestException($response);
         }
         if (500 === $status) {
-            throw new \Montross50\UptimeRobotApi\SDK\Exception\EditMonitorInternalServerErrorException();
+            throw new \Montross50\UptimeRobotApi\SDK\Exception\EditMonitorInternalServerErrorException($response);
         }
     }
-    public function getAuthenticationScopes() : array
+    public function getAuthenticationScopes(): array
     {
-        return array();
+        return [];
     }
 }

@@ -6,7 +6,6 @@ class NewAlertContact extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Base
 {
     /**
      * New alert contacts of any type (mobile/SMS alert contacts are not supported yet) can be created using this method. The alert contacts created using the API are validated with the same way as they were created from uptimerobot.com (activation link for e-mails, tc.).
-     *
      * @param array $queryParameters {
      *     @var string $apiKey API key
      *     @var string $format Response format
@@ -16,39 +15,39 @@ class NewAlertContact extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Base
      *     @var string $alertContactFriendlyName
      * }
      */
-    public function __construct(array $queryParameters = array())
+    public function __construct(array $queryParameters = [])
     {
         $this->queryParameters = $queryParameters;
     }
     use \Montross50\UptimeRobotApi\SDK\Runtime\Client\EndpointTrait;
-    public function getMethod() : string
+    public function getMethod(): string
     {
         return 'GET';
     }
-    public function getUri() : string
+    public function getUri(): string
     {
         return '/newAlertContact';
     }
-    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null) : array
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        return array(array(), null);
+        return [[], null];
     }
-    public function getExtraHeaders() : array
+    public function getExtraHeaders(): array
     {
-        return array('Accept' => array('application/json'));
+        return ['Accept' => ['application/json']];
     }
-    protected function getQueryOptionsResolver() : \Symfony\Component\OptionsResolver\OptionsResolver
+    protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('apiKey', 'format', 'noJsonCallback', 'alertContactType', 'alertContactValue', 'alertContactFriendlyName'));
-        $optionsResolver->setRequired(array('apiKey', 'alertContactType', 'alertContactValue'));
-        $optionsResolver->setDefaults(array('format' => 'json', 'noJsonCallback' => '1'));
-        $optionsResolver->setAllowedTypes('apiKey', array('string'));
-        $optionsResolver->setAllowedTypes('format', array('string'));
-        $optionsResolver->setAllowedTypes('noJsonCallback', array('string'));
-        $optionsResolver->setAllowedTypes('alertContactType', array('string'));
-        $optionsResolver->setAllowedTypes('alertContactValue', array('string'));
-        $optionsResolver->setAllowedTypes('alertContactFriendlyName', array('string'));
+        $optionsResolver->setDefined(['apiKey', 'format', 'noJsonCallback', 'alertContactType', 'alertContactValue', 'alertContactFriendlyName']);
+        $optionsResolver->setRequired(['apiKey', 'alertContactType', 'alertContactValue']);
+        $optionsResolver->setDefaults(['format' => 'json', 'noJsonCallback' => '1']);
+        $optionsResolver->addAllowedTypes('apiKey', ['string']);
+        $optionsResolver->addAllowedTypes('format', ['string']);
+        $optionsResolver->addAllowedTypes('noJsonCallback', ['string']);
+        $optionsResolver->addAllowedTypes('alertContactType', ['string']);
+        $optionsResolver->addAllowedTypes('alertContactValue', ['string']);
+        $optionsResolver->addAllowedTypes('alertContactFriendlyName', ['string']);
         return $optionsResolver;
     }
     /**
@@ -59,20 +58,22 @@ class NewAlertContact extends \Montross50\UptimeRobotApi\SDK\Runtime\Client\Base
      *
      * @return null|\Montross50\UptimeRobotApi\SDK\Model\AlertContactResponse
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (200 === $status) {
-            return $serializer->deserialize($body, 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContactResponse', 'json');
+            return $serializer->deserialize($body, 'Montross50\UptimeRobotApi\SDK\Model\AlertContactResponse', 'json');
         }
         if (400 === $status) {
-            throw new \Montross50\UptimeRobotApi\SDK\Exception\NewAlertContactBadRequestException();
+            throw new \Montross50\UptimeRobotApi\SDK\Exception\NewAlertContactBadRequestException($response);
         }
         if (500 === $status) {
-            throw new \Montross50\UptimeRobotApi\SDK\Exception\NewAlertContactInternalServerErrorException();
+            throw new \Montross50\UptimeRobotApi\SDK\Exception\NewAlertContactInternalServerErrorException($response);
         }
     }
-    public function getAuthenticationScopes() : array
+    public function getAuthenticationScopes(): array
     {
-        return array();
+        return [];
     }
 }

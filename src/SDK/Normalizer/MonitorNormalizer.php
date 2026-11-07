@@ -4,41 +4,38 @@ namespace Montross50\UptimeRobotApi\SDK\Normalizer;
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class MonitorNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    use ValidatorTrait;
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === 'Montross50\\UptimeRobotApi\\SDK\\Model\\Monitor';
+        return $type === \Montross50\UptimeRobotApi\SDK\Model\Monitor::class;
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === 'Montross50\\UptimeRobotApi\\SDK\\Model\\Monitor';
+        return is_object($data) && get_class($data) === \Montross50\UptimeRobotApi\SDK\Model\Monitor::class;
     }
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Montross50\UptimeRobotApi\SDK\Model\Monitor();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
-        }
-        $object = new \Montross50\UptimeRobotApi\SDK\Model\Monitor();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
         }
         if (\array_key_exists('id', $data)) {
             $object->setId($data['id']);
@@ -83,97 +80,98 @@ class MonitorNormalizer implements DenormalizerInterface, NormalizerInterface, D
             $object->setCustomuptimeratio($data['customuptimeratio']);
         }
         if (\array_key_exists('alertcontact', $data)) {
-            $values = array();
+            $values = [];
             foreach ($data['alertcontact'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContact', 'json', $context);
+                $values[] = $this->denormalizer->denormalize($value, \Montross50\UptimeRobotApi\SDK\Model\AlertContact::class, 'json', $context);
             }
             $object->setAlertcontact($values);
         }
         if (\array_key_exists('log', $data)) {
-            $values_1 = array();
+            $values_1 = [];
             foreach ($data['log'] as $value_1) {
-                $values_1[] = $this->denormalizer->denormalize($value_1, 'Montross50\\UptimeRobotApi\\SDK\\Model\\Log', 'json', $context);
+                $values_1[] = $this->denormalizer->denormalize($value_1, \Montross50\UptimeRobotApi\SDK\Model\Log::class, 'json', $context);
             }
             $object->setLog($values_1);
         }
         if (\array_key_exists('responsetime', $data)) {
-            $values_2 = array();
+            $values_2 = [];
             foreach ($data['responsetime'] as $value_2) {
-                $values_2[] = $this->denormalizer->denormalize($value_2, 'Montross50\\UptimeRobotApi\\SDK\\Model\\ResponseTime', 'json', $context);
+                $values_2[] = $this->denormalizer->denormalize($value_2, \Montross50\UptimeRobotApi\SDK\Model\ResponseTime::class, 'json', $context);
             }
             $object->setResponsetime($values_2);
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = array();
-        if (null !== $object->getId()) {
-            $data['id'] = $object->getId();
+        $dataArray = [];
+        if ($data->isInitialized('id') && null !== $data->getId()) {
+            $dataArray['id'] = $data->getId();
         }
-        if (null !== $object->getFriendlyname()) {
-            $data['friendlyname'] = $object->getFriendlyname();
+        if ($data->isInitialized('friendlyname') && null !== $data->getFriendlyname()) {
+            $dataArray['friendlyname'] = $data->getFriendlyname();
         }
-        if (null !== $object->getUrl()) {
-            $data['url'] = $object->getUrl();
+        if ($data->isInitialized('url') && null !== $data->getUrl()) {
+            $dataArray['url'] = $data->getUrl();
         }
-        if (null !== $object->getType()) {
-            $data['type'] = $object->getType();
+        if ($data->isInitialized('type') && null !== $data->getType()) {
+            $dataArray['type'] = $data->getType();
         }
-        if (null !== $object->getSubtype()) {
-            $data['subtype'] = $object->getSubtype();
+        if ($data->isInitialized('subtype') && null !== $data->getSubtype()) {
+            $dataArray['subtype'] = $data->getSubtype();
         }
-        if (null !== $object->getKeywordtype()) {
-            $data['keywordtype'] = $object->getKeywordtype();
+        if ($data->isInitialized('keywordtype') && null !== $data->getKeywordtype()) {
+            $dataArray['keywordtype'] = $data->getKeywordtype();
         }
-        if (null !== $object->getKeywordvalue()) {
-            $data['keywordvalue'] = $object->getKeywordvalue();
+        if ($data->isInitialized('keywordvalue') && null !== $data->getKeywordvalue()) {
+            $dataArray['keywordvalue'] = $data->getKeywordvalue();
         }
-        if (null !== $object->getHttpusername()) {
-            $data['httpusername'] = $object->getHttpusername();
+        if ($data->isInitialized('httpusername') && null !== $data->getHttpusername()) {
+            $dataArray['httpusername'] = $data->getHttpusername();
         }
-        if (null !== $object->getHttppassword()) {
-            $data['httppassword'] = $object->getHttppassword();
+        if ($data->isInitialized('httppassword') && null !== $data->getHttppassword()) {
+            $dataArray['httppassword'] = $data->getHttppassword();
         }
-        if (null !== $object->getPort()) {
-            $data['port'] = $object->getPort();
+        if ($data->isInitialized('port') && null !== $data->getPort()) {
+            $dataArray['port'] = $data->getPort();
         }
-        if (null !== $object->getInterval()) {
-            $data['interval'] = $object->getInterval();
+        if ($data->isInitialized('interval') && null !== $data->getInterval()) {
+            $dataArray['interval'] = $data->getInterval();
         }
-        if (null !== $object->getStatus()) {
-            $data['status'] = $object->getStatus();
+        if ($data->isInitialized('status') && null !== $data->getStatus()) {
+            $dataArray['status'] = $data->getStatus();
         }
-        if (null !== $object->getAlltimeuptimeratio()) {
-            $data['alltimeuptimeratio'] = $object->getAlltimeuptimeratio();
+        if ($data->isInitialized('alltimeuptimeratio') && null !== $data->getAlltimeuptimeratio()) {
+            $dataArray['alltimeuptimeratio'] = $data->getAlltimeuptimeratio();
         }
-        if (null !== $object->getCustomuptimeratio()) {
-            $data['customuptimeratio'] = $object->getCustomuptimeratio();
+        if ($data->isInitialized('customuptimeratio') && null !== $data->getCustomuptimeratio()) {
+            $dataArray['customuptimeratio'] = $data->getCustomuptimeratio();
         }
-        if (null !== $object->getAlertcontact()) {
-            $values = array();
-            foreach ($object->getAlertcontact() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+        if ($data->isInitialized('alertcontact') && null !== $data->getAlertcontact()) {
+            $values = [];
+            foreach ($data->getAlertcontact() as $value) {
+                $values[] = $value === null ? null : new \Montross50\UptimeRobotApi\SDK\Runtime\JsonObject($this->normalizer->normalize($value, 'json', $context));
             }
-            $data['alertcontact'] = $values;
+            $dataArray['alertcontact'] = $values;
         }
-        if (null !== $object->getLog()) {
-            $values_1 = array();
-            foreach ($object->getLog() as $value_1) {
-                $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
+        if ($data->isInitialized('log') && null !== $data->getLog()) {
+            $values_1 = [];
+            foreach ($data->getLog() as $value_1) {
+                $values_1[] = $value_1 === null ? null : new \Montross50\UptimeRobotApi\SDK\Runtime\JsonObject($this->normalizer->normalize($value_1, 'json', $context));
             }
-            $data['log'] = $values_1;
+            $dataArray['log'] = $values_1;
         }
-        if (null !== $object->getResponsetime()) {
-            $values_2 = array();
-            foreach ($object->getResponsetime() as $value_2) {
-                $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
+        if ($data->isInitialized('responsetime') && null !== $data->getResponsetime()) {
+            $values_2 = [];
+            foreach ($data->getResponsetime() as $value_2) {
+                $values_2[] = $value_2 === null ? null : new \Montross50\UptimeRobotApi\SDK\Runtime\JsonObject($this->normalizer->normalize($value_2, 'json', $context));
             }
-            $data['responsetime'] = $values_2;
+            $dataArray['responsetime'] = $values_2;
         }
-        return $data;
+        return $dataArray;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Montross50\UptimeRobotApi\SDK\Model\Monitor::class => false];
     }
 }

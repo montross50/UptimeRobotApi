@@ -4,41 +4,38 @@ namespace Montross50\UptimeRobotApi\SDK\Normalizer;
 
 use Jane\Component\JsonSchemaRuntime\Reference;
 use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Montross50\UptimeRobotApi\SDK\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-
 class AlertContactNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null) : bool
+    use ValidatorTrait;
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContact';
+        return $type === \Montross50\UptimeRobotApi\SDK\Model\AlertContact::class;
     }
-    public function supportsNormalization($data, $format = null) : bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === 'Montross50\\UptimeRobotApi\\SDK\\Model\\AlertContact';
+        return is_object($data) && get_class($data) === \Montross50\UptimeRobotApi\SDK\Model\AlertContact::class;
     }
-    /**
-     * @return mixed
-     */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \Montross50\UptimeRobotApi\SDK\Model\AlertContact();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
-        }
-        $object = new \Montross50\UptimeRobotApi\SDK\Model\AlertContact();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
         }
         if (\array_key_exists('id', $data)) {
             $object->setId($data['id']);
@@ -60,30 +57,31 @@ class AlertContactNormalizer implements DenormalizerInterface, NormalizerInterfa
         }
         return $object;
     }
-    /**
-     * @return array|string|int|float|bool|\ArrayObject|null
-     */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = array();
-        if (null !== $object->getId()) {
-            $data['id'] = $object->getId();
+        $dataArray = [];
+        if ($data->isInitialized('id') && null !== $data->getId()) {
+            $dataArray['id'] = $data->getId();
         }
-        if (null !== $object->getType()) {
-            $data['type'] = $object->getType();
+        if ($data->isInitialized('type') && null !== $data->getType()) {
+            $dataArray['type'] = $data->getType();
         }
-        if (null !== $object->getValue()) {
-            $data['value'] = $object->getValue();
+        if ($data->isInitialized('value') && null !== $data->getValue()) {
+            $dataArray['value'] = $data->getValue();
         }
-        if (null !== $object->getFriendlyname()) {
-            $data['friendlyname'] = $object->getFriendlyname();
+        if ($data->isInitialized('friendlyname') && null !== $data->getFriendlyname()) {
+            $dataArray['friendlyname'] = $data->getFriendlyname();
         }
-        if (null !== $object->getThreshold()) {
-            $data['threshold'] = $object->getThreshold();
+        if ($data->isInitialized('threshold') && null !== $data->getThreshold()) {
+            $dataArray['threshold'] = $data->getThreshold();
         }
-        if (null !== $object->getRecurrence()) {
-            $data['recurrence'] = $object->getRecurrence();
+        if ($data->isInitialized('recurrence') && null !== $data->getRecurrence()) {
+            $dataArray['recurrence'] = $data->getRecurrence();
         }
-        return $data;
+        return $dataArray;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\Montross50\UptimeRobotApi\SDK\Model\AlertContact::class => false];
     }
 }
